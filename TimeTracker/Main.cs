@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace TimeTracker
+{
+    public partial class Main : Form
+    {
+
+        bool timer_on = false;
+        DateTime start_time;
+        string description;
+        int seconds = 0, minutes = 0, hours = 0;
+
+        public Main()
+        {
+            InitializeComponent();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            // Set stopwatch image properties
+            logo_pb.Size = new Size(64,64);
+            logo_pb.BackgroundImage = Properties.Resources.stopwatch;
+            logo_pb.BackgroundImageLayout = ImageLayout.Stretch;
+
+            // Set settings image properties
+            settings_pb.Size = new Size(32, 32);
+            settings_pb.BackgroundImage = Properties.Resources.settings;
+            settings_pb.BackgroundImageLayout = ImageLayout.Stretch;
+            settings_pb.Cursor = Cursors.Hand;
+
+            // Load Database functions
+            Database db = new Database();
+
+            // Load projects into dropdown
+            List<Project> projects = db.GetAllProjects();
+            for(int i = 0; i < projects.Count; i++)
+            {
+                projects_cb.Items.Add(projects[i].project_name);
+            }
+
+            // Load entries
+            List<Entry> entries = db.GetAllEntries();
+            for(int i = 0; i < entries.Count; i++)
+            {
+                Project pr = entries[i].Project();
+            }
+        }
+
+        private void toggleTimer_btn_Click(object sender, EventArgs e)
+        {
+            if (!timer_on)
+            {
+                timer.Start();
+                description = desc_tb.Text;
+                desc_tb.Text = "";
+                start_time = DateTime.Now;
+            }
+            else
+            {
+                timer.Stop();
+
+                // Add new entry in database
+
+                string project_name = projects_cb.SelectedItem != null ? projects_cb.SelectedItem.ToString() : "";
+                (new Database()).AddEntry(start_time, DateTime.Now, description, project_name);
+
+                description = "";
+                seconds = hours = minutes = 0;
+                currentTime_lb.Text = "00:00:00";
+            }
+            timer_on = !timer_on;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            seconds++;
+            if(seconds == 60)
+            {
+                minutes++;
+                if(minutes == 60)
+                {
+                    minutes = 0;
+                    hours++;
+                }
+                seconds = 0;
+            }
+
+            currentTime_lb.Text = (hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        }
+    }
+}
