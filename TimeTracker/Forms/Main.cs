@@ -37,6 +37,12 @@ namespace TimeTracker
             settings_pb.BackgroundImageLayout = ImageLayout.Stretch;
             settings_pb.Cursor = Cursors.Hand;
 
+            // Set project image properties
+            project_pb.Size = new Size(32, 32);
+            project_pb.BackgroundImage = Properties.Resources.project;
+            project_pb.BackgroundImageLayout = ImageLayout.Stretch;
+            project_pb.Cursor = Cursors.Hand;
+
             // Load Database functions
             Database db = new Database();
 
@@ -59,6 +65,12 @@ namespace TimeTracker
         private void settings_pb_Click(object sender, EventArgs e)
         {
             (new Settings()).Show();
+        }
+
+        // Open projects management form
+        private void project_pb_Click(object sender, EventArgs e)
+        {
+            (new ProjectsManagement()).Show();
         }
 
         // Start/Stop timer
@@ -84,11 +96,32 @@ namespace TimeTracker
 
                 // Add new entry in database
 
+                // Get project name from dropdown
                 string project_name = projects_cb.SelectedItem != null ? projects_cb.SelectedItem.ToString() : "";
 
                 Database db = new Database();
-                db.AddEntry(start_time, DateTime.Now, description, project_name);
 
+                // Create new entry without project_id
+                Entry new_entry = new Entry
+                {
+                    start_time = start_time,
+                    end_time = DateTime.Now,
+                    description = description,
+                };
+
+                // Find project by name
+                Project found = db.FindProjectByName(project_name);
+                
+                // If project exists, set project id
+                if(found != null)
+                {
+                    new_entry.project_id = found.id;
+                }
+
+                // Save the entry
+                new_entry.Save();
+
+                // Reset variables
                 description = "";
                 seconds = hours = minutes = 0;
                 currentTime_lb.Text = "00:00:00";

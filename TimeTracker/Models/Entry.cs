@@ -25,5 +25,10 @@ namespace TimeTracker
                 return null;
             }
         }
+
+        public void Save()
+        {
+            (new Database()).AddEntry(this);
+        }
     }
 }

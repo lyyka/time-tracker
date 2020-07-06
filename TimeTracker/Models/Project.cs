@@ -15,5 +15,10 @@ namespace TimeTracker
         {
             return (new Database()).FindProjectEntries(this.id);
         }
+
+        public void Save()
+        {
+            (new Database()).AddProject(this);
+        }
     }
 }

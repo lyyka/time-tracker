@@ -22,6 +22,27 @@ namespace TimeTracker
 
         // PROJECTS
 
+        // -- Create new project
+        public void AddProject(Project project)
+        {
+            using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                conn.Execute("dbo.Project_Insert @project_name", project);
+            };
+        }
+
+        // -- Upadte a project
+        public void UpdateProject()
+        {
+            throw new NotImplementedException();
+        }
+
+        // -- Delte a project
+        public void DeleteProject()
+        {
+            throw new NotImplementedException();
+        }
+
         // -- Get all projects from db
         public List<Project> GetAllProjects()
         {
@@ -54,37 +75,18 @@ namespace TimeTracker
         // ENTRIES
 
         // -- Add new time entry
-        public void AddEntry(DateTime start_time, DateTime end_time, string description, string project_name)
+        public void AddEntry(Entry new_entry)
         {
-            Project found = FindProjectByName(project_name);
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
             {
-                object parameters = new { 
-                    start_time = start_time, 
-                    end_time = end_time, 
-                    description = description, 
-                };
-
-                if(found != null)
+                if (new_entry.project_id > 0)
                 {
-                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @project_id", new
-                    {
-                        start_time = start_time,
-                        end_time = end_time,
-                        description = description,
-                        project_id = found.id
-                    });
+                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @project_id", new_entry);
                 }
                 else
                 {
-                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description", new
-                    {
-                        start_time = start_time,
-                        end_time = end_time,
-                        description = description,
-                    });
+                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description", new_entry);
                 }
-
             };
             
         }
