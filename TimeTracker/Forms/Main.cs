@@ -15,8 +15,9 @@ namespace TimeTracker
     {
 
         bool timer_on = false;
-        DateTime start_time;
-        string description;
+        Entry current_entry = null;
+        //DateTime start_time;
+        //string description;
         int seconds = 0, minutes = 0, hours = 0;
 
         public Main()
@@ -82,46 +83,58 @@ namespace TimeTracker
         {
             if (!timer_on)
             {
-                toggleTimer_btn.Text = "Stop Timer";
-                timer.Start();
-                description = Helper.TrimToLen(desc_tb.Text, 50);
-                desc_tb.Text = "";
-                start_time = DateTime.Now;
-            }
-            else
-            {
-                toggleTimer_btn.Text = "Start Timer";
-                timer.Stop();
-
-                // Add new entry in database
-
                 // Get project name from dropdown
                 string project_name = projects_cb.SelectedItem != null ? projects_cb.SelectedItem.ToString() : "";
 
-                // Create new entry without project_id
-                Entry new_entry = new Entry
-                {
-                    start_time = start_time,
-                    end_time = DateTime.Now,
-                    description = description,
-                };
+                // Disable dropdown
+                
+
+                current_entry = new Entry();
 
                 // Find project by name
                 Project found = (new ProjectsController()).FindProjectByName(project_name);
-                
+
                 // If project exists, set project id
-                if(found != null)
+                if (found != null)
                 {
-                    new_entry.project_id = found.id;
+                    current_entry.project_id = found.id;
+                    current_entry.hourly_rate = found.hourly_rate > 0 ? found.hourly_rate : Convert.ToInt32((new SettingsController()).GetSetting("hourly_rate").value);
+                    current_entry.currency = found.currency;
                 }
+                else
+                {
+                    current_entry.hourly_rate = Convert.ToInt32((new SettingsController()).GetSetting("hourly_rate").value);
+                    current_entry.currency = (new SettingsController()).GetSetting("currency").value;
+                }
+                current_entry.description = Helper.TrimToLen(desc_tb.Text, 50);
+                current_entry.start_time = DateTime.Now;
+
+                toggleTimer_btn.Text = "Stop Timer";
+                desc_tb.Text = "";
+                projects_cb.Enabled = false;
+                desc_tb.Enabled = false;
+
+                timer.Start();
+            }
+            else
+            {
+                projects_cb.Enabled = true;
+                desc_tb.Enabled = true;
+
+                toggleTimer_btn.Text = "Start Timer";
+                timer.Stop();
+
+                // Attach end time to current entry
+                current_entry.end_time = DateTime.Now;
 
                 // Save the entry
-                new_entry.Save();
+                current_entry.Save();
 
                 // Reset variables
-                description = "";
+                current_entry = null;
                 seconds = hours = minutes = 0;
                 currentTime_lb.Text = "00:00:00";
+                entryEarnings_lb.Text = "0.00";
             }
             timer_on = !timer_on;
         }
@@ -142,6 +155,7 @@ namespace TimeTracker
             }
 
             currentTime_lb.Text = (hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            entryEarnings_lb.Text = Convert.ToString(current_entry.CalculateEarnings()) + current_entry.currency;
         }
     }
 }

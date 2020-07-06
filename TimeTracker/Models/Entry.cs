@@ -15,6 +15,10 @@ namespace TimeTracker
         public string description { get; set; }
         public int project_id { get; set; }
 
+        // We are saving hourly rate/currency of project/global to each entry, in case it changes at some point
+        public int hourly_rate { get; set; }
+        public string currency { get; set; }
+
         public Project Project()
         {
             if(this.project_id != 0)
@@ -30,6 +34,12 @@ namespace TimeTracker
         public void Save()
         {
             (new EntriesController()).AddEntry(this);
+        }
+
+        public double CalculateEarnings()
+        {
+            TimeSpan span = DateTime.Now.Subtract(this.start_time);
+            return Math.Round(span.TotalHours * this.hourly_rate, 2);
         }
     }
 }

@@ -19,11 +19,11 @@ namespace TimeTracker.Controllers
             {
                 if (new_entry.project_id > 0)
                 {
-                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @project_id", new_entry);
+                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @hourly_rate, @project_id", new_entry);
                 }
                 else
                 {
-                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description", new_entry);
+                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @hourly_rate", new_entry);
                 }
             };
 

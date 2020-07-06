@@ -41,6 +41,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.currentTime_lb = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.entryEarnings_lb = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).BeginInit();
@@ -154,12 +155,23 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // entryEarnings_lb
+            // 
+            this.entryEarnings_lb.AutoSize = true;
+            this.entryEarnings_lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.entryEarnings_lb.Location = new System.Drawing.Point(643, 71);
+            this.entryEarnings_lb.Name = "entryEarnings_lb";
+            this.entryEarnings_lb.Size = new System.Drawing.Size(31, 15);
+            this.entryEarnings_lb.TabIndex = 9;
+            this.entryEarnings_lb.Text = "0.00";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 527);
+            this.Controls.Add(this.entryEarnings_lb);
             this.Controls.Add(this.currentTime_lb);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -195,6 +207,7 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox project_pb;
         private System.Windows.Forms.ComboBox projects_cb;
+        private System.Windows.Forms.Label entryEarnings_lb;
     }
 }
 

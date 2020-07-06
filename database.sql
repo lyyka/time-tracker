@@ -1,6 +1,6 @@
 USE [time_tracker]
 GO
-/****** Object:  Table [dbo].[entries]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  Table [dbo].[entries]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,13 +11,15 @@ CREATE TABLE [dbo].[entries](
 	[end_time] [datetime] NOT NULL,
 	[description] [varchar](50) NULL,
 	[project_id] [int] NULL,
+	[hourly_rate] [int] NULL,
+	[currency] [varchar](50) NULL,
  CONSTRAINT [PK_Entries] PRIMARY KEY NONCLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[projects]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  Table [dbo].[projects]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,7 +36,7 @@ CREATE TABLE [dbo].[projects](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[settings]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  Table [dbo].[settings]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -58,7 +60,7 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[entries] CHECK CONSTRAINT [FK_Entries_Projects]
 GO
-/****** Object:  StoredProcedure [dbo].[Entry_GetAll]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Entry_GetAll]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -80,7 +82,7 @@ BEGIN
 	select * from entries
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Entry_Insert]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Entry_Insert]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,6 +98,8 @@ CREATE PROCEDURE [dbo].[Entry_Insert]
 	@start_time datetime,
 	@end_time datetime,
 	@description varchar(50),
+	@hourly_rate int,
+	@currency varchar(50),
 	@project_id int = NULL
 AS
 BEGIN
@@ -104,10 +108,10 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	insert into entries(start_time, end_time, description, project_id) values(@start_time, @end_time, @description, @project_id);
+	insert into entries(start_time, end_time, description, project_id, hourly_rate, currency) values(@start_time, @end_time, @description, @project_id, @hourly_rate, @currency);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Delete]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_Delete]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +137,7 @@ BEGIN
 	DELETE FROM projects where id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_GetAll]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_GetAll]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -150,7 +154,7 @@ BEGIN
 	SELECT * FROM projects
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_GetAllEntries]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_GetAllEntries]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,7 +172,7 @@ BEGIN
 	select * from entries where project_id = @project_id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_GetByID]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_GetByID]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,7 +195,7 @@ BEGIN
 	select * from projects where id = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_GetByName]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_GetByName]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -214,7 +218,7 @@ BEGIN
 	select * from projects where project_name = @project_name
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Insert]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_Insert]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +243,7 @@ BEGIN
 	insert into projects(project_name) values(@project_name);
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Project_Update]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Project_Update]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -268,7 +272,7 @@ BEGIN
 	update projects set project_name = @project_name, hourly_rate = @hourly_rate, currency = @currency where id = @id;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Settings_GetAll]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Settings_GetAll]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -291,7 +295,7 @@ BEGIN
 	select * from settings
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Settings_GetByName]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Settings_GetByName]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -316,7 +320,7 @@ BEGIN
 	select * from settings WHERE name = @name
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Settings_UpdateAll]    Script Date: 06-Jul-20 22:11:16 ******/
+/****** Object:  StoredProcedure [dbo].[Settings_UpdateAll]    Script Date: 06-Jul-20 23:16:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

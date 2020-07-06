@@ -49,6 +49,11 @@
             // hourly_rate
             // 
             this.hourly_rate.Location = new System.Drawing.Point(16, 32);
+            this.hourly_rate.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.hourly_rate.Name = "hourly_rate";
             this.hourly_rate.Size = new System.Drawing.Size(93, 20);
             this.hourly_rate.TabIndex = 2;

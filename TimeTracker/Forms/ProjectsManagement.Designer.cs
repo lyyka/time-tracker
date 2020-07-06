@@ -31,6 +31,10 @@
             this.projects_listbox = new System.Windows.Forms.ListBox();
             this.addProject_btn = new System.Windows.Forms.Button();
             this.displayProject_panel = new System.Windows.Forms.Panel();
+            this.displayCurrency_tb = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.displayHourlyRate_nud = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.displayDeleteProject_btn = new System.Windows.Forms.Button();
             this.displayUpdateProject_btn = new System.Windows.Forms.Button();
             this.displayCreatedAt_lb = new System.Windows.Forms.Label();
@@ -39,10 +43,6 @@
             this.displayProjectName_tb = new System.Windows.Forms.TextBox();
             this.newProjectName_tb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.displayHourlyRate_nud = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.displayCurrency_tb = new System.Windows.Forms.TextBox();
             this.displayProject_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayHourlyRate_nud)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +83,44 @@
             this.displayProject_panel.Name = "displayProject_panel";
             this.displayProject_panel.Size = new System.Drawing.Size(294, 331);
             this.displayProject_panel.TabIndex = 2;
+            // 
+            // displayCurrency_tb
+            // 
+            this.displayCurrency_tb.Location = new System.Drawing.Point(163, 89);
+            this.displayCurrency_tb.MaxLength = 50;
+            this.displayCurrency_tb.Name = "displayCurrency_tb";
+            this.displayCurrency_tb.Size = new System.Drawing.Size(115, 20);
+            this.displayCurrency_tb.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(161, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Specific currency";
+            // 
+            // displayHourlyRate_nud
+            // 
+            this.displayHourlyRate_nud.Location = new System.Drawing.Point(17, 89);
+            this.displayHourlyRate_nud.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.displayHourlyRate_nud.Name = "displayHourlyRate_nud";
+            this.displayHourlyRate_nud.Size = new System.Drawing.Size(120, 20);
+            this.displayHourlyRate_nud.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 73);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Specific hourly rate";
             // 
             // displayDeleteProject_btn
             // 
@@ -155,39 +193,6 @@
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "New project name:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Specific hourly rate";
-            // 
-            // displayHourlyRate_nud
-            // 
-            this.displayHourlyRate_nud.Location = new System.Drawing.Point(17, 89);
-            this.displayHourlyRate_nud.Name = "displayHourlyRate_nud";
-            this.displayHourlyRate_nud.Size = new System.Drawing.Size(120, 20);
-            this.displayHourlyRate_nud.TabIndex = 8;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(161, 73);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Specific currency";
-            // 
-            // displayCurrency_tb
-            // 
-            this.displayCurrency_tb.Location = new System.Drawing.Point(163, 89);
-            this.displayCurrency_tb.MaxLength = 50;
-            this.displayCurrency_tb.Name = "displayCurrency_tb";
-            this.displayCurrency_tb.Size = new System.Drawing.Size(115, 20);
-            this.displayCurrency_tb.TabIndex = 10;
             // 
             // ProjectsManagement
             // 
