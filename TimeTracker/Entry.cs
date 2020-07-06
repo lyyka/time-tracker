@@ -8,7 +8,7 @@ namespace TimeTracker
 {
     class Entry
     {
-        public int id { get; }
+        public int id { get; set; }
         public DateTime start_time { get; set; }
         public DateTime end_time { get; set; }
         public string description { get; set; }

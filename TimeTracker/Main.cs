@@ -23,6 +23,7 @@ namespace TimeTracker
             InitializeComponent();
         }
 
+        // On form load
         private void Main_Load(object sender, EventArgs e)
         {
             // Set stopwatch image properties
@@ -54,12 +55,26 @@ namespace TimeTracker
             }
         }
 
+        // Open settings form
+        private void settings_pb_Click(object sender, EventArgs e)
+        {
+            (new Settings()).Show();
+        }
+
+        // Start/Stop timer
         private void toggleTimer_btn_Click(object sender, EventArgs e)
         {
             if (!timer_on)
             {
                 timer.Start();
-                description = desc_tb.Text;
+                if(desc_tb.Text.Length > 50)
+                {
+                    description = desc_tb.Text.Substring(0, 50);
+                }
+                else
+                {
+                    description = desc_tb.Text;
+                }
                 desc_tb.Text = "";
                 start_time = DateTime.Now;
             }
@@ -70,7 +85,9 @@ namespace TimeTracker
                 // Add new entry in database
 
                 string project_name = projects_cb.SelectedItem != null ? projects_cb.SelectedItem.ToString() : "";
-                (new Database()).AddEntry(start_time, DateTime.Now, description, project_name);
+
+                Database db = new Database();
+                db.AddEntry(start_time, DateTime.Now, description, project_name);
 
                 description = "";
                 seconds = hours = minutes = 0;
@@ -79,6 +96,7 @@ namespace TimeTracker
             timer_on = !timer_on;
         }
 
+        // Timer tick
         private void timer_Tick(object sender, EventArgs e)
         {
             seconds++;

@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace TimeTracker
 {
-    class Project
+    class Setting
     {
         public int id { get; set; }
-        public string project_name { get; set; }
-
-        public List<Entry> Entries()
-        {
-            return (new Database()).FindProjectEntries(this.id);
-        }
+        public string name { get; set; }
+        public string value { get; set; }
     }
 }

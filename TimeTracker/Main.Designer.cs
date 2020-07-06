@@ -48,6 +48,7 @@
             // desc_tb
             // 
             this.desc_tb.Location = new System.Drawing.Point(113, 28);
+            this.desc_tb.MaxLength = 50;
             this.desc_tb.Name = "desc_tb";
             this.desc_tb.Size = new System.Drawing.Size(343, 20);
             this.desc_tb.TabIndex = 1;
@@ -106,6 +107,7 @@
             this.settings_pb.Size = new System.Drawing.Size(32, 32);
             this.settings_pb.TabIndex = 1;
             this.settings_pb.TabStop = false;
+            this.settings_pb.Click += new System.EventHandler(this.settings_pb_Click);
             // 
             // logo_pb
             // 
@@ -154,6 +156,7 @@
             this.Controls.Add(this.toggleTimer_btn);
             this.Controls.Add(this.desc_tb);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Time Tracker";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
