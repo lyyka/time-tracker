@@ -84,14 +84,7 @@ namespace TimeTracker
             {
                 toggleTimer_btn.Text = "Stop Timer";
                 timer.Start();
-                if(desc_tb.Text.Trim().Length > 50)
-                {
-                    description = desc_tb.Text.Trim().Substring(0, 50);
-                }
-                else
-                {
-                    description = desc_tb.Text.Trim();
-                }
+                description = Helper.TrimToLen(desc_tb.Text, 50);
                 desc_tb.Text = "";
                 start_time = DateTime.Now;
             }

@@ -10,16 +10,23 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.Controllers
 {
-    public class SettingsController
+    public class SettingsController : Controller
     {
-        string db_name = "time_tracker";
-
         // -- Get all settings
         public List<Setting> GetAllSettings()
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
             {
                 return conn.Query<Setting>("dbo.Settings_GetAll").ToList();
+            };
+        }
+
+        // -- Get specific setting
+        public Setting GetSetting(string name)
+        {
+            using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                return conn.Query<Setting>("dbo.Settings_GetByName @name", new { name = name }).ToList()[0];
             };
         }
 

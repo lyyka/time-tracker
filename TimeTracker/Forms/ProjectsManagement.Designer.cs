@@ -39,7 +39,12 @@
             this.displayProjectName_tb = new System.Windows.Forms.TextBox();
             this.newProjectName_tb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.displayHourlyRate_nud = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.displayCurrency_tb = new System.Windows.Forms.TextBox();
             this.displayProject_panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.displayHourlyRate_nud)).BeginInit();
             this.SuspendLayout();
             // 
             // projects_listbox
@@ -64,6 +69,10 @@
             // displayProject_panel
             // 
             this.displayProject_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.displayProject_panel.Controls.Add(this.displayCurrency_tb);
+            this.displayProject_panel.Controls.Add(this.label5);
+            this.displayProject_panel.Controls.Add(this.displayHourlyRate_nud);
+            this.displayProject_panel.Controls.Add(this.label4);
             this.displayProject_panel.Controls.Add(this.displayDeleteProject_btn);
             this.displayProject_panel.Controls.Add(this.displayUpdateProject_btn);
             this.displayProject_panel.Controls.Add(this.displayCreatedAt_lb);
@@ -77,7 +86,7 @@
             // 
             // displayDeleteProject_btn
             // 
-            this.displayDeleteProject_btn.Location = new System.Drawing.Point(111, 79);
+            this.displayDeleteProject_btn.Location = new System.Drawing.Point(111, 127);
             this.displayDeleteProject_btn.Name = "displayDeleteProject_btn";
             this.displayDeleteProject_btn.Size = new System.Drawing.Size(75, 23);
             this.displayDeleteProject_btn.TabIndex = 5;
@@ -87,7 +96,7 @@
             // 
             // displayUpdateProject_btn
             // 
-            this.displayUpdateProject_btn.Location = new System.Drawing.Point(17, 79);
+            this.displayUpdateProject_btn.Location = new System.Drawing.Point(17, 127);
             this.displayUpdateProject_btn.Name = "displayUpdateProject_btn";
             this.displayUpdateProject_btn.Size = new System.Drawing.Size(75, 23);
             this.displayUpdateProject_btn.TabIndex = 4;
@@ -147,6 +156,39 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "New project name:";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 73);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Specific hourly rate";
+            // 
+            // displayHourlyRate_nud
+            // 
+            this.displayHourlyRate_nud.Location = new System.Drawing.Point(17, 89);
+            this.displayHourlyRate_nud.Name = "displayHourlyRate_nud";
+            this.displayHourlyRate_nud.Size = new System.Drawing.Size(120, 20);
+            this.displayHourlyRate_nud.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(161, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Specific currency";
+            // 
+            // displayCurrency_tb
+            // 
+            this.displayCurrency_tb.Location = new System.Drawing.Point(163, 89);
+            this.displayCurrency_tb.MaxLength = 50;
+            this.displayCurrency_tb.Name = "displayCurrency_tb";
+            this.displayCurrency_tb.Size = new System.Drawing.Size(115, 20);
+            this.displayCurrency_tb.TabIndex = 10;
+            // 
             // ProjectsManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,6 +206,7 @@
             this.Load += new System.EventHandler(this.ProjectsManagement_Load);
             this.displayProject_panel.ResumeLayout(false);
             this.displayProject_panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.displayHourlyRate_nud)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +225,9 @@
         private System.Windows.Forms.TextBox displayProjectName_tb;
         private System.Windows.Forms.Button displayDeleteProject_btn;
         private System.Windows.Forms.Button displayUpdateProject_btn;
+        private System.Windows.Forms.NumericUpDown displayHourlyRate_nud;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox displayCurrency_tb;
+        private System.Windows.Forms.Label label5;
     }
 }

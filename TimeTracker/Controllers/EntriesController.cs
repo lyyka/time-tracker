@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.Controllers
 {
-    public class EntriesController
+    public class EntriesController : Controller
     {
-        string db_name = "time_tracker";
-
         // -- Add new time entry
         public void AddEntry(Entry new_entry)
         {

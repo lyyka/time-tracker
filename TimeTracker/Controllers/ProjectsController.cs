@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.Controllers
 {
-    public class ProjectsController
+    public class ProjectsController : Controller
     {
-        string db_name = "time_tracker";
+        //string db_name = "time_tracker";
 
         // -- Create new project
         public void AddProject(Project project)
@@ -28,7 +28,7 @@ namespace TimeTracker.Controllers
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
             {
-                conn.Execute("dbo.Project_Update @id, @project_name", project);
+                conn.Execute("dbo.Project_Update @id, @project_name, @hourly_rate, @currency", project);
             };
         }
 

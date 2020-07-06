@@ -11,6 +11,8 @@ namespace TimeTracker
     {
         public int id { get; set; }
         public string project_name { get; set; }
+        public int hourly_rate { get; set; }
+        public string currency { get; set; }
         public DateTime created_at { get; set; }
 
         public List<Entry> Entries()

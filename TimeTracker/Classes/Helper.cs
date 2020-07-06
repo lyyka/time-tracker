@@ -13,5 +13,17 @@ namespace TimeTracker
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
+
+        public static string TrimToLen(string s, int len)
+        {
+            if (s.Trim().Length > len)
+            {
+                return s.Trim().Substring(0, len);
+            }
+            else
+            {
+                return s.Trim();
+            }
+        }
     }
 }

@@ -72,7 +72,7 @@ namespace TimeTracker
                     TextBox tb = this.Controls.Find(settings[i].name, true).FirstOrDefault() as TextBox;
                     if (tb != null)
                     {
-                        settings[i].value = tb.Text;
+                        settings[i].value = Helper.TrimToLen(tb.Text, 50);
                     }
                 }
             }

@@ -46,14 +46,7 @@ namespace TimeTracker
             if(newProjectName_tb.Text.Trim().Length > 0)
             {
                 Project new_project = new Project();
-                if (newProjectName_tb.Text.Trim().Length > 50)
-                {
-                    new_project.project_name = newProjectName_tb.Text.Trim().Substring(0, 50);
-                }
-                else
-                {
-                    new_project.project_name = newProjectName_tb.Text;
-                }
+                new_project.project_name = Helper.TrimToLen(newProjectName_tb.Text, 50);
                 newProjectName_tb.Text = "";
                 new_project.Save();
                 List<Project> projects = UpdateBindings();
@@ -75,6 +68,8 @@ namespace TimeTracker
 
                 // Populate form fields
                 displayProjectName_tb.Text = project.project_name;
+                displayHourlyRate_nud.Value = project.hourly_rate;
+                displayCurrency_tb.Text = project.currency != null ? project.currency : "";
                 displayCreatedAt_lb.Text = project.created_at.ToString();
             }
             else
@@ -88,14 +83,9 @@ namespace TimeTracker
         {
             if(selected_project != null && displayProjectName_tb.Text.Trim().Length > 0)
             {
-                if(displayProjectName_tb.Text.Trim().Length > 50)
-                {
-                    selected_project.project_name = displayProjectName_tb.Text.Trim().Substring(0, 50);
-                }
-                else
-                {
-                    selected_project.project_name = displayProjectName_tb.Text.Trim();
-                }
+                selected_project.project_name = Helper.TrimToLen(displayProjectName_tb.Text, 50);
+                selected_project.hourly_rate = Convert.ToInt32(displayHourlyRate_nud.Value);
+                selected_project.currency = Helper.TrimToLen(displayCurrency_tb.Text, 50);
                 selected_project.Save();
                 List<Project> projects = UpdateBindings();
                 if (parent != null)
