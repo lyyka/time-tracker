@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
     public partial class ProjectsManagement : Form
     {
-        public ProjectsManagement()
+        Main parent;
+        Project selected_project;
+        public ProjectsManagement(Main parent)
         {
+            // We save the form so we can updated projects dropdown each time new project is added
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -24,12 +29,15 @@ namespace TimeTracker
         }
 
         // Updates ListBox with all projects from db (useful after onLoad/insert/update)
-        private void UpdateBindings()
+        private List<Project> UpdateBindings()
         {
-            Database db = new Database();
+            ProjectsController db = new ProjectsController();
+            List<Project> projects = db.GetAllProjects();
             // Load all projects in a list box
-            projects_listbox.DataSource = db.GetAllProjects();
+            projects_listbox.DataSource = projects;
             projects_listbox.DisplayMember = "project_name";
+
+            return projects;
         }
 
         // Add project to database
@@ -37,11 +45,10 @@ namespace TimeTracker
         {
             if(newProjectName_tb.Text.Trim().Length > 0)
             {
-                Database db = new Database();
                 Project new_project = new Project();
-                if (newProjectName_tb.Text.Length > 50)
+                if (newProjectName_tb.Text.Trim().Length > 50)
                 {
-                    new_project.project_name = newProjectName_tb.Text.Substring(0, 50);
+                    new_project.project_name = newProjectName_tb.Text.Trim().Substring(0, 50);
                 }
                 else
                 {
@@ -49,14 +56,72 @@ namespace TimeTracker
                 }
                 newProjectName_tb.Text = "";
                 new_project.Save();
-                UpdateBindings();
+                List<Project> projects = UpdateBindings();
+                if(parent != null)
+                {
+                    parent.LoadProjects(projects);
+                }
             }
         }
 
         // When someone chooses some project from the list
         private void projects_listbox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string project_name = projects_listbox.SelectedItem.ToString();
+            Project project = (Project)projects_listbox.SelectedItem;
+            if (project != null)
+            {
+                displayProject_panel.Show();
+                selected_project = project;
+
+                // Populate form fields
+                displayProjectName_tb.Text = project.project_name;
+                displayCreatedAt_lb.Text = project.created_at.ToString();
+            }
+            else
+            {
+                displayProject_panel.Hide();
+            }
+        }
+
+        // Update displayed project
+        private void displayUpdateProject_btn_Click(object sender, EventArgs e)
+        {
+            if(selected_project != null && displayProjectName_tb.Text.Trim().Length > 0)
+            {
+                if(displayProjectName_tb.Text.Trim().Length > 50)
+                {
+                    selected_project.project_name = displayProjectName_tb.Text.Trim().Substring(0, 50);
+                }
+                else
+                {
+                    selected_project.project_name = displayProjectName_tb.Text.Trim();
+                }
+                selected_project.Save();
+                List<Project> projects = UpdateBindings();
+                if (parent != null)
+                {
+                    parent.LoadProjects(projects);
+                }
+            }
+        }
+
+        // Delete displayed project
+        private void displayDeleteProject_btn_Click(object sender, EventArgs e)
+        {
+            if(selected_project != null)
+            {
+                selected_project.Delete();
+                selected_project = null;
+
+                displayProjectName_tb.Text = "";
+                displayCreatedAt_lb.Text = "";
+                displayProject_panel.Hide();
+                List<Project> projects = UpdateBindings();
+                if(parent != null)
+                {
+                    parent.LoadProjects(projects);
+                }
+            }
         }
     }
 }

@@ -35,16 +35,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.project_pb = new System.Windows.Forms.PictureBox();
             this.settings_pb = new System.Windows.Forms.PictureBox();
             this.logo_pb = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.currentTime_lb = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.project_pb = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             this.SuspendLayout();
             // 
             // desc_tb
@@ -102,6 +102,16 @@
             this.panel1.Size = new System.Drawing.Size(99, 530);
             this.panel1.TabIndex = 6;
             // 
+            // project_pb
+            // 
+            this.project_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.project_pb.Location = new System.Drawing.Point(31, 155);
+            this.project_pb.Name = "project_pb";
+            this.project_pb.Size = new System.Drawing.Size(32, 32);
+            this.project_pb.TabIndex = 2;
+            this.project_pb.TabStop = false;
+            this.project_pb.Click += new System.EventHandler(this.project_pb_Click);
+            // 
             // settings_pb
             // 
             this.settings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -144,16 +154,6 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // project_pb
-            // 
-            this.project_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.project_pb.Location = new System.Drawing.Point(31, 155);
-            this.project_pb.Name = "project_pb";
-            this.project_pb.Size = new System.Drawing.Size(32, 32);
-            this.project_pb.TabIndex = 2;
-            this.project_pb.TabStop = false;
-            this.project_pb.Click += new System.EventHandler(this.project_pb_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -173,9 +173,9 @@
             this.Text = "Time Tracker";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,7 +186,6 @@
         private System.Windows.Forms.PictureBox logo_pb;
         private System.Windows.Forms.TextBox desc_tb;
         private System.Windows.Forms.Button toggleTimer_btn;
-        private System.Windows.Forms.ComboBox projects_cb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
@@ -195,6 +194,7 @@
         private System.Windows.Forms.Label currentTime_lb;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox project_pb;
+        private System.Windows.Forms.ComboBox projects_cb;
     }
 }
 

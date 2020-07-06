@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
@@ -22,7 +23,7 @@ namespace TimeTracker
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            Database db = new Database();
+            SettingsController db = new SettingsController();
             settings = db.GetAllSettings();
 
             // Map settings name from db with textbox name in our form
@@ -77,7 +78,7 @@ namespace TimeTracker
             }
 
             // Use updated settings list to update db
-            Database db = new Database();
+            SettingsController db = new SettingsController();
             db.UpdateAllSettings(settings);
             MessageBox.Show("Settings updated");
         }

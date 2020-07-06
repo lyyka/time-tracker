@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTracker
 {
-    class Setting
+    public class Setting
     {
         public int id { get; set; }
         public string name { get; set; }

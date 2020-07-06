@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Database.cs" />
+    <Compile Include="Controllers\EntriesController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Forms\Main.cs">

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
-    class Entry
+    public class Entry
     {
         public int id { get; set; }
         public DateTime start_time { get; set; }
@@ -18,7 +19,7 @@ namespace TimeTracker
         {
             if(this.project_id != 0)
             {
-                return (new Database()).FindProject(this.project_id);
+                return (new ProjectsController()).FindProject(this.project_id);
             }
             else
             {
@@ -28,7 +29,7 @@ namespace TimeTracker
 
         public void Save()
         {
-            (new Database()).AddEntry(this);
+            (new EntriesController()).AddEntry(this);
         }
     }
 }

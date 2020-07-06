@@ -3,22 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
-    class Project
+    public class Project
     {
         public int id { get; set; }
         public string project_name { get; set; }
+        public DateTime created_at { get; set; }
 
         public List<Entry> Entries()
         {
-            return (new Database()).FindProjectEntries(this.id);
+            return (new EntriesController()).FindProjectEntries(this.id);
         }
 
         public void Save()
         {
-            (new Database()).AddProject(this);
+            if(id > 0)
+            {
+                (new ProjectsController()).UpdateProject(this);
+            }
+            else
+            {
+                (new ProjectsController()).AddProject(this);
+            }
+        }
+
+        public void Delete()
+        {
+            if(id > 0)
+            {
+                (new ProjectsController()).DeleteProject(this);
+            }
         }
     }
 }

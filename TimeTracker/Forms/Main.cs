@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
@@ -43,21 +44,24 @@ namespace TimeTracker
             project_pb.BackgroundImageLayout = ImageLayout.Stretch;
             project_pb.Cursor = Cursors.Hand;
 
-            // Load Database functions
-            Database db = new Database();
-
-            // Load projects into dropdown
-            List<Project> projects = db.GetAllProjects();
-            for(int i = 0; i < projects.Count; i++)
-            {
-                projects_cb.Items.Add(projects[i].project_name);
-            }
+            // Load projects into dropdown on top of form
+            LoadProjects((new ProjectsController()).GetAllProjects());
 
             // Load entries
-            List<Entry> entries = db.GetAllEntries();
+            List<Entry> entries = (new EntriesController()).GetAllEntries();
             for(int i = 0; i < entries.Count; i++)
             {
                 Project pr = entries[i].Project();
+            }
+        }
+
+        // Loads projects into a dropdown on top of form. Can be called from ProjectsManagement after new project is created.
+        public void LoadProjects(List<Project> projects)
+        {
+            projects_cb.Items.Clear();
+            for (int i = 0; i < projects.Count; i++)
+            {
+                projects_cb.Items.Add(projects[i].project_name);
             }
         }
 
@@ -70,7 +74,7 @@ namespace TimeTracker
         // Open projects management form
         private void project_pb_Click(object sender, EventArgs e)
         {
-            (new ProjectsManagement()).Show();
+            (new ProjectsManagement(this)).Show();
         }
 
         // Start/Stop timer
@@ -78,28 +82,28 @@ namespace TimeTracker
         {
             if (!timer_on)
             {
+                toggleTimer_btn.Text = "Stop Timer";
                 timer.Start();
-                if(desc_tb.Text.Length > 50)
+                if(desc_tb.Text.Trim().Length > 50)
                 {
-                    description = desc_tb.Text.Substring(0, 50);
+                    description = desc_tb.Text.Trim().Substring(0, 50);
                 }
                 else
                 {
-                    description = desc_tb.Text;
+                    description = desc_tb.Text.Trim();
                 }
                 desc_tb.Text = "";
                 start_time = DateTime.Now;
             }
             else
             {
+                toggleTimer_btn.Text = "Start Timer";
                 timer.Stop();
 
                 // Add new entry in database
 
                 // Get project name from dropdown
                 string project_name = projects_cb.SelectedItem != null ? projects_cb.SelectedItem.ToString() : "";
-
-                Database db = new Database();
 
                 // Create new entry without project_id
                 Entry new_entry = new Entry
@@ -110,7 +114,7 @@ namespace TimeTracker
                 };
 
                 // Find project by name
-                Project found = db.FindProjectByName(project_name);
+                Project found = (new ProjectsController()).FindProjectByName(project_name);
                 
                 // If project exists, set project id
                 if(found != null)
