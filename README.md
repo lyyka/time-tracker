@@ -5,3 +5,9 @@ Time tracker desktop app developed in C#. Enables you to track time and asign tr
 - Projects Management
 - Tracking time on/off projects
 - Hourly rate calculation
+
+#TODO
+[]Show all entries on main form
+[]Enable entries update/delete from main form directly
+[]Create graphs form
+[]Export to .txt form 

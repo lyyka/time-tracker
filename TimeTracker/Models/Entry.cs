@@ -11,7 +11,7 @@ namespace TimeTracker
     {
         public int id { get; set; }
         public DateTime start_time { get; set; }
-        public DateTime end_time { get; set; }
+        public DateTime? end_time { get; set; }
         public string description { get; set; }
         public int project_id { get; set; }
 
@@ -21,7 +21,7 @@ namespace TimeTracker
 
         public Project Project()
         {
-            if(this.project_id != 0)
+            if(this.project_id > 0)
             {
                 return (new ProjectsController()).FindProject(this.project_id);
             }
@@ -33,12 +33,36 @@ namespace TimeTracker
 
         public void Save()
         {
-            (new EntriesController()).AddEntry(this);
+            if(this.id > 0)
+            {
+                (new EntriesController()).UpdateEntry(this);
+            }
+            else
+            {
+                (new EntriesController()).AddEntry(this);
+            }
+        }
+
+        public void Delete()
+        {
+            if (id > 0)
+            {
+                (new EntriesController()).DeleteEntry(this);
+            }
         }
 
         public double CalculateEarnings()
         {
-            TimeSpan span = DateTime.Now.Subtract(this.start_time);
+            DateTime moment;
+            if (this.end_time != null)
+            {
+                moment = (DateTime)this.end_time; // Convert back to non-nullable
+            }
+            else
+            {
+                moment = DateTime.Now;
+            }
+            TimeSpan span = moment.Subtract(this.start_time);
             return Math.Round(span.TotalHours * this.hourly_rate, 2);
         }
     }

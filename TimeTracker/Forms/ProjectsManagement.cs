@@ -98,7 +98,8 @@ namespace TimeTracker
         // Delete displayed project
         private void displayDeleteProject_btn_Click(object sender, EventArgs e)
         {
-            if(selected_project != null)
+            DialogResult dgh = MessageBox.Show("All entries tied to this project will be permanently deleted", "Are you sure?", MessageBoxButtons.YesNo);
+            if(selected_project != null && dgh == DialogResult.Yes)
             {
                 selected_project.Delete();
                 selected_project = null;

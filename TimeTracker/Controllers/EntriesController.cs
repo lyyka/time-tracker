@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTracker.Classes;
 
 namespace TimeTracker.Controllers
 {
@@ -19,22 +20,54 @@ namespace TimeTracker.Controllers
             {
                 if (new_entry.project_id > 0)
                 {
-                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @hourly_rate, @project_id", new_entry);
+                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @hourly_rate, @currency, @project_id", new_entry);
                 }
                 else
                 {
-                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @hourly_rate", new_entry);
+                    conn.Execute("dbo.Entry_Insert @start_time, @end_time, @description, @hourly_rate, @currency", new_entry);
                 }
             };
 
         }
 
+        // -- Delete entry
+        public void DeleteEntry(Entry entry)
+        {
+            using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                conn.Execute("dbo.Entry_Delete @id", entry);
+            }
+        }
+
+        // -- Update entry
+        public void UpdateEntry(Entry entry)
+        {
+            using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                if(entry.project_id > 0)
+                {
+                    conn.Execute("dbo.Entry_Update @start_time, @end_time, @description, @hourly_rate, @currency, @project_id", entry);
+                }
+                else
+                {
+                    conn.Execute("dbo.Entry_Update @start_time, @end_time, @description, @hourly_rate, @currency", entry);
+                }
+            };
+        }
+
         // -- Get all entries
-        public List<Entry> GetAllEntries()
+        public List<Entry> GetAllEntries(Sort sort = null)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
             {
-                return conn.Query<Entry>("dbo.Entry_GetAll").ToList();
+                if(sort == null)
+                {
+                    return conn.Query<Entry>("dbo.Entry_GetAll").ToList();
+                }
+                else
+                {
+                    return conn.Query<Entry>("dbo.Entry_GetAll @sort_column, @sort_order", sort).ToList();
+                }
             };
         }
 

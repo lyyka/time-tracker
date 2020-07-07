@@ -38,19 +38,22 @@
             this.project_pb = new System.Windows.Forms.PictureBox();
             this.settings_pb = new System.Windows.Forms.PictureBox();
             this.logo_pb = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.currentTime_lb = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.entryEarnings_lb = new System.Windows.Forms.Label();
+            this.entriesWrap_panel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // desc_tb
             // 
-            this.desc_tb.Location = new System.Drawing.Point(113, 28);
+            this.desc_tb.Location = new System.Drawing.Point(6, 28);
             this.desc_tb.MaxLength = 50;
             this.desc_tb.Name = "desc_tb";
             this.desc_tb.Size = new System.Drawing.Size(343, 20);
@@ -58,7 +61,7 @@
             // 
             // toggleTimer_btn
             // 
-            this.toggleTimer_btn.Location = new System.Drawing.Point(113, 54);
+            this.toggleTimer_btn.Location = new System.Drawing.Point(6, 54);
             this.toggleTimer_btn.Name = "toggleTimer_btn";
             this.toggleTimer_btn.Size = new System.Drawing.Size(95, 32);
             this.toggleTimer_btn.TabIndex = 2;
@@ -69,7 +72,7 @@
             // projects_cb
             // 
             this.projects_cb.FormattingEnabled = true;
-            this.projects_cb.Location = new System.Drawing.Point(473, 27);
+            this.projects_cb.Location = new System.Drawing.Point(366, 27);
             this.projects_cb.Name = "projects_cb";
             this.projects_cb.Size = new System.Drawing.Size(121, 21);
             this.projects_cb.TabIndex = 3;
@@ -77,7 +80,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(110, 12);
+            this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 13);
             this.label1.TabIndex = 4;
@@ -86,7 +89,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(470, 9);
+            this.label2.Location = new System.Drawing.Point(363, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 5;
@@ -95,18 +98,20 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.project_pb);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.settings_pb);
+            this.panel1.Controls.Add(this.project_pb);
             this.panel1.Controls.Add(this.logo_pb);
-            this.panel1.Location = new System.Drawing.Point(-4, -2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(99, 530);
+            this.panel1.Size = new System.Drawing.Size(99, 527);
             this.panel1.TabIndex = 6;
             // 
             // project_pb
             // 
             this.project_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.project_pb.Location = new System.Drawing.Point(31, 155);
+            this.project_pb.Location = new System.Drawing.Point(33, 160);
             this.project_pb.Name = "project_pb";
             this.project_pb.Size = new System.Drawing.Size(32, 32);
             this.project_pb.TabIndex = 2;
@@ -116,7 +121,7 @@
             // settings_pb
             // 
             this.settings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.settings_pb.Location = new System.Drawing.Point(31, 106);
+            this.settings_pb.Location = new System.Drawing.Point(33, 107);
             this.settings_pb.Name = "settings_pb";
             this.settings_pb.Size = new System.Drawing.Size(32, 32);
             this.settings_pb.TabIndex = 1;
@@ -132,19 +137,12 @@
             this.logo_pb.TabIndex = 0;
             this.logo_pb.TabStop = false;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Silver;
-            this.panel2.Location = new System.Drawing.Point(95, 104);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(706, 424);
-            this.panel2.TabIndex = 7;
-            // 
             // currentTime_lb
             // 
+            this.currentTime_lb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.currentTime_lb.AutoSize = true;
             this.currentTime_lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentTime_lb.Location = new System.Drawing.Point(639, 27);
+            this.currentTime_lb.Location = new System.Drawing.Point(605, 14);
             this.currentTime_lb.Name = "currentTime_lb";
             this.currentTime_lb.Size = new System.Drawing.Size(149, 39);
             this.currentTime_lb.TabIndex = 8;
@@ -157,29 +155,63 @@
             // 
             // entryEarnings_lb
             // 
+            this.entryEarnings_lb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.entryEarnings_lb.AutoSize = true;
             this.entryEarnings_lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.entryEarnings_lb.Location = new System.Drawing.Point(643, 71);
+            this.entryEarnings_lb.Location = new System.Drawing.Point(609, 53);
             this.entryEarnings_lb.Name = "entryEarnings_lb";
             this.entryEarnings_lb.Size = new System.Drawing.Size(31, 15);
             this.entryEarnings_lb.TabIndex = 9;
             this.entryEarnings_lb.Text = "0.00";
+            // 
+            // entriesWrap_panel
+            // 
+            this.entriesWrap_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.entriesWrap_panel.AutoScroll = true;
+            this.entriesWrap_panel.BackColor = System.Drawing.Color.White;
+            this.entriesWrap_panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.entriesWrap_panel.Location = new System.Drawing.Point(99, 91);
+            this.entriesWrap_panel.Name = "entriesWrap_panel";
+            this.entriesWrap_panel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.entriesWrap_panel.Size = new System.Drawing.Size(774, 436);
+            this.entriesWrap_panel.TabIndex = 0;
+            this.entriesWrap_panel.WrapContents = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.entryEarnings_lb);
+            this.panel2.Controls.Add(this.desc_tb);
+            this.panel2.Controls.Add(this.currentTime_lb);
+            this.panel2.Controls.Add(this.toggleTimer_btn);
+            this.panel2.Controls.Add(this.projects_cb);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(99, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(774, 93);
+            this.panel2.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label3.Location = new System.Drawing.Point(0, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 2);
+            this.label3.TabIndex = 3;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 527);
-            this.Controls.Add(this.entryEarnings_lb);
-            this.Controls.Add(this.currentTime_lb);
+            this.ClientSize = new System.Drawing.Size(873, 527);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.entriesWrap_panel);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.projects_cb);
-            this.Controls.Add(this.toggleTimer_btn);
-            this.Controls.Add(this.desc_tb);
+            this.MinimumSize = new System.Drawing.Size(846, 566);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Time Tracker";
@@ -188,8 +220,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.project_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -201,13 +234,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox settings_pb;
         private System.Windows.Forms.Label currentTime_lb;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox project_pb;
         private System.Windows.Forms.ComboBox projects_cb;
         private System.Windows.Forms.Label entryEarnings_lb;
+        private System.Windows.Forms.FlowLayoutPanel entriesWrap_panel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

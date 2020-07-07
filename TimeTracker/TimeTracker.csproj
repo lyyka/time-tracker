@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Sort.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\EntriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -112,13 +113,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\stopwatch.png" />
+    <None Include="Resources\project.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\project.png" />
+    <None Include="Resources\stopwatch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
