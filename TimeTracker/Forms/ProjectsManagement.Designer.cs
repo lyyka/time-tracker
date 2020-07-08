@@ -49,6 +49,9 @@
             // 
             // projects_listbox
             // 
+            this.projects_listbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.projects_listbox.FormattingEnabled = true;
             this.projects_listbox.Location = new System.Drawing.Point(12, 51);
             this.projects_listbox.Name = "projects_listbox";
@@ -58,6 +61,8 @@
             // 
             // addProject_btn
             // 
+            this.addProject_btn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.addProject_btn.Location = new System.Drawing.Point(196, 23);
             this.addProject_btn.Name = "addProject_btn";
             this.addProject_btn.Size = new System.Drawing.Size(125, 23);
@@ -79,9 +84,10 @@
             this.displayProject_panel.Controls.Add(this.label3);
             this.displayProject_panel.Controls.Add(this.label2);
             this.displayProject_panel.Controls.Add(this.displayProjectName_tb);
-            this.displayProject_panel.Location = new System.Drawing.Point(338, -1);
+            this.displayProject_panel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.displayProject_panel.Location = new System.Drawing.Point(334, 0);
             this.displayProject_panel.Name = "displayProject_panel";
-            this.displayProject_panel.Size = new System.Drawing.Size(294, 331);
+            this.displayProject_panel.Size = new System.Drawing.Size(294, 330);
             this.displayProject_panel.TabIndex = 2;
             // 
             // displayCurrency_tb
@@ -126,7 +132,7 @@
             // 
             this.displayDeleteProject_btn.Location = new System.Drawing.Point(111, 127);
             this.displayDeleteProject_btn.Name = "displayDeleteProject_btn";
-            this.displayDeleteProject_btn.Size = new System.Drawing.Size(75, 23);
+            this.displayDeleteProject_btn.Size = new System.Drawing.Size(75, 22);
             this.displayDeleteProject_btn.TabIndex = 5;
             this.displayDeleteProject_btn.Text = "Delete";
             this.displayDeleteProject_btn.UseVisualStyleBackColor = true;
@@ -136,7 +142,7 @@
             // 
             this.displayUpdateProject_btn.Location = new System.Drawing.Point(17, 127);
             this.displayUpdateProject_btn.Name = "displayUpdateProject_btn";
-            this.displayUpdateProject_btn.Size = new System.Drawing.Size(75, 23);
+            this.displayUpdateProject_btn.Size = new System.Drawing.Size(75, 22);
             this.displayUpdateProject_btn.TabIndex = 4;
             this.displayUpdateProject_btn.Text = "Update";
             this.displayUpdateProject_btn.UseVisualStyleBackColor = true;

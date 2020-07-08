@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeTracker.Controllers;
+using TimeTracker.Forms;
 
 namespace TimeTracker
 {
@@ -25,6 +26,7 @@ namespace TimeTracker
         // On Form load
         private void ProjectsManagement_Load(object sender, EventArgs e)
         {
+            this.MinimumSize = this.Size;
             UpdateBindings();
         }
 

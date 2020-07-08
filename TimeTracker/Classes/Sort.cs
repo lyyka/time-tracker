@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTracker.Classes
 {
+    // Used so we can send column and sorting order to stored procedures when getting all entries/projects
     public class Sort
     {
         public string sort_column { get; set; }

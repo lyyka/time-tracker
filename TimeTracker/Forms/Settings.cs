@@ -23,6 +23,11 @@ namespace TimeTracker
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            // Set up min. size of form
+            this.MinimumSize = this.Size;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            // Load settings
             SettingsController db = new SettingsController();
             settings = db.GetAllSettings();
 

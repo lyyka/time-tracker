@@ -79,5 +79,22 @@ namespace TimeTracker.Controllers
                 return conn.Query<Entry>("dbo.Project_GetAllEntries @project_id", new { project_id = project_id }).ToList();
             };
         }
+
+        // -- Filter entries for chart
+        // -- -- Returns entries in a time span, sorted by start_time
+        public List<Entry> FilterEntriesForChart(EntriesFilter filter)
+        {
+            using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                if(filter.project_id > 0)
+                {
+                    return conn.Query<Entry>("dbo.Entry_Filter @from_date, @to_date, @project_id", filter).ToList();
+                }
+                else
+                {
+                    return conn.Query<Entry>("dbo.Entry_Filter @from_date, @to_date", filter).ToList();
+                }
+            }
+        }
     }
 }

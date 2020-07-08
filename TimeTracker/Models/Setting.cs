@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTracker
 {
+    // DB Model of Setting row
     public class Setting
     {
         public int id { get; set; }

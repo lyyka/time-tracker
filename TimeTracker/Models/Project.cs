@@ -7,6 +7,7 @@ using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
+    // DB Model of Project
     public class Project
     {
         public int id { get; set; }
@@ -20,6 +21,8 @@ namespace TimeTracker
             return (new EntriesController()).FindProjectEntries(this.id);
         }
 
+        // Saves model to db if it is not saved already
+        // If it is already in db, updates it with models current info
         public void Save()
         {
             if(id > 0)

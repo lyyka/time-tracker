@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeTracker.Controllers;
 using TimeTracker.Classes;
+using TimeTracker.Forms;
 
 namespace TimeTracker
 {
     public partial class Main : Form
     {
-
         bool timer_on = false;
         Entry current_entry = null;
         //DateTime start_time;
@@ -30,24 +30,22 @@ namespace TimeTracker
         private void Main_Load(object sender, EventArgs e)
         {
             // Set stopwatch image properties
-            logo_pb.Size = new Size(64,64);
             logo_pb.BackgroundImage = Properties.Resources.stopwatch;
-            logo_pb.BackgroundImageLayout = ImageLayout.Stretch;
 
             // Set settings image properties
-            settings_pb.Size = new Size(32, 32);
             settings_pb.BackgroundImage = Properties.Resources.settings;
-            settings_pb.BackgroundImageLayout = ImageLayout.Stretch;
-            settings_pb.Cursor = Cursors.Hand;
 
             // Set project image properties
-            project_pb.Size = new Size(32, 32);
             project_pb.BackgroundImage = Properties.Resources.project;
-            project_pb.BackgroundImageLayout = ImageLayout.Stretch;
-            project_pb.Cursor = Cursors.Hand;
+
+            // Set charts image properties
+            charts_pb.BackgroundImage = Properties.Resources.chart;
 
             // Load projects into dropdown on top of form
             LoadProjects((new ProjectsController()).GetAllProjects());
+
+            // Set min size of form
+            this.MinimumSize = this.Size;
 
             // Load entries
             entriesWrap_panel.AutoScroll = false;
@@ -61,6 +59,7 @@ namespace TimeTracker
         public void LoadProjects(List<Project> projects)
         {
             projects_cb.Items.Clear();
+            projects_cb.Items.Add("");
             for (int i = 0; i < projects.Count; i++)
             {
                 projects_cb.Items.Add(projects[i].project_name);
@@ -72,9 +71,16 @@ namespace TimeTracker
         {
             entriesWrap_panel.Controls.Clear();
             // entriesWrap_panel is a main wrap
-            for(int i = 0; i < entries.Count; i++)
+            if(entries.Count > 0)
             {
-                AddEntry(entries[i]);
+                for (int i = 0; i < entries.Count; i++)
+                {
+                    AddEntry(entries[i]);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No time entries are found");
             }
         }
 
@@ -261,7 +267,7 @@ namespace TimeTracker
                 }
 
                 // Find project by name
-                string project_name = projectUpdate_cb.SelectedItem != null ? projectUpdate_cb.SelectedItem.ToString() : "";
+                string project_name = projectUpdate_cb.SelectedItem != null && projectUpdate_cb.SelectedItem.ToString().Trim() != "" ? projectUpdate_cb.SelectedItem.ToString() : "";
                 Project found = (new ProjectsController()).FindProjectByName(project_name);
                 if(found != null)
                 {
@@ -333,13 +339,18 @@ namespace TimeTracker
             (new ProjectsManagement(this)).Show();
         }
 
+        private void charts_pb_Click(object sender, EventArgs e)
+        {
+            (new Charts()).Show();
+        }
+
         // Start/Stop timer
         private void toggleTimer_btn_Click(object sender, EventArgs e)
         {
             if (!timer_on)
             {
                 // Get project name from dropdown
-                string project_name = projects_cb.SelectedItem != null ? projects_cb.SelectedItem.ToString() : "";
+                string project_name = projects_cb.SelectedItem != null && projects_cb.SelectedItem.ToString().Trim() != "" ? projects_cb.SelectedItem.ToString() : "";
 
                 current_entry = new Entry();
 

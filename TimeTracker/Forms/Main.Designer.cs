@@ -35,18 +35,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.project_pb = new System.Windows.Forms.PictureBox();
+            this.charts_pb = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.settings_pb = new System.Windows.Forms.PictureBox();
+            this.project_pb = new System.Windows.Forms.PictureBox();
             this.logo_pb = new System.Windows.Forms.PictureBox();
             this.currentTime_lb = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.entryEarnings_lb = new System.Windows.Forms.Label();
             this.entriesWrap_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +100,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.charts_pb);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.settings_pb);
             this.panel1.Controls.Add(this.project_pb);
@@ -105,28 +108,49 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(99, 527);
+            this.panel1.Size = new System.Drawing.Size(99, 566);
             this.panel1.TabIndex = 6;
             // 
-            // project_pb
+            // charts_pb
             // 
-            this.project_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.project_pb.Location = new System.Drawing.Point(33, 160);
-            this.project_pb.Name = "project_pb";
-            this.project_pb.Size = new System.Drawing.Size(32, 32);
-            this.project_pb.TabIndex = 2;
-            this.project_pb.TabStop = false;
-            this.project_pb.Click += new System.EventHandler(this.project_pb_Click);
+            this.charts_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.charts_pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.charts_pb.Location = new System.Drawing.Point(33, 213);
+            this.charts_pb.Name = "charts_pb";
+            this.charts_pb.Size = new System.Drawing.Size(32, 32);
+            this.charts_pb.TabIndex = 4;
+            this.charts_pb.TabStop = false;
+            this.charts_pb.Click += new System.EventHandler(this.charts_pb_Click);
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label3.Location = new System.Drawing.Point(0, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 2);
+            this.label3.TabIndex = 3;
             // 
             // settings_pb
             // 
             this.settings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settings_pb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.settings_pb.Location = new System.Drawing.Point(33, 107);
             this.settings_pb.Name = "settings_pb";
             this.settings_pb.Size = new System.Drawing.Size(32, 32);
             this.settings_pb.TabIndex = 1;
             this.settings_pb.TabStop = false;
             this.settings_pb.Click += new System.EventHandler(this.settings_pb_Click);
+            // 
+            // project_pb
+            // 
+            this.project_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.project_pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.project_pb.Location = new System.Drawing.Point(33, 160);
+            this.project_pb.Name = "project_pb";
+            this.project_pb.Size = new System.Drawing.Size(32, 32);
+            this.project_pb.TabIndex = 2;
+            this.project_pb.TabStop = false;
+            this.project_pb.Click += new System.EventHandler(this.project_pb_Click);
             // 
             // logo_pb
             // 
@@ -175,7 +199,7 @@
             this.entriesWrap_panel.Location = new System.Drawing.Point(99, 91);
             this.entriesWrap_panel.Name = "entriesWrap_panel";
             this.entriesWrap_panel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.entriesWrap_panel.Size = new System.Drawing.Size(774, 436);
+            this.entriesWrap_panel.Size = new System.Drawing.Size(774, 475);
             this.entriesWrap_panel.TabIndex = 0;
             this.entriesWrap_panel.WrapContents = false;
             // 
@@ -194,31 +218,25 @@
             this.panel2.Size = new System.Drawing.Size(774, 93);
             this.panel2.TabIndex = 0;
             // 
-            // label3
-            // 
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label3.Location = new System.Drawing.Point(0, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 2);
-            this.label3.TabIndex = 3;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(873, 527);
+            this.ClientSize = new System.Drawing.Size(873, 566);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.entriesWrap_panel);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimumSize = new System.Drawing.Size(846, 566);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Time Tracker";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.project_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -243,6 +261,7 @@
         private System.Windows.Forms.FlowLayoutPanel entriesWrap_panel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox charts_pb;
     }
 }
 

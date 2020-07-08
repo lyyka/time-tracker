@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,11 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ChartPoint.cs" />
+    <Compile Include="Classes\EntriesFilter.cs" />
     <Compile Include="Classes\Sort.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\EntriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Forms\Charts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Charts.Designer.cs">
+      <DependentUpon>Charts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Forms\Main.cs">
@@ -79,6 +88,9 @@
     <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Charts.resx">
+      <DependentUpon>Charts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

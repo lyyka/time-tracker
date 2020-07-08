@@ -7,6 +7,7 @@ using TimeTracker.Controllers;
 
 namespace TimeTracker
 {
+    // DB Model of entry
     public class Entry
     {
         public int id { get; set; }
@@ -31,6 +32,8 @@ namespace TimeTracker
             }
         }
 
+        // Saves model to db if it is not saved already
+        // If it is already in db, updates it with models current info
         public void Save()
         {
             if(this.id > 0)
