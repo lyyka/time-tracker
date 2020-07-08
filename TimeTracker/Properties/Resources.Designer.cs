@@ -73,6 +73,16 @@ namespace TimeTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap finance {
+            get {
+                object obj = ResourceManager.GetObject("finance", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap project {
             get {
                 object obj = ResourceManager.GetObject("project", resourceCulture);
@@ -97,6 +107,16 @@ namespace TimeTracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("stopwatch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon stopwatch_icon {
+            get {
+                object obj = ResourceManager.GetObject("stopwatch_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

@@ -23,6 +23,9 @@ namespace TimeTracker
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            // Icon
+            this.Icon = Properties.Resources.stopwatch_icon;
+
             // Set up min. size of form
             this.MinimumSize = this.Size;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

@@ -12,7 +12,10 @@ namespace TimeTracker.Controllers
 {
     public class SettingsController : Controller
     {
-        // -- Get all settings
+        /// <summary>
+        /// Returns all settings in database.
+        /// </summary>
+        /// <returns></returns>
         public List<Setting> GetAllSettings()
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -21,7 +24,11 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Get specific setting
+        /// <summary>
+        /// Returns setting by it's name
+        /// </summary>
+        /// <param name="name">Name of setting to be found</param>
+        /// <returns>Settings object</returns>
         public Setting GetSetting(string name)
         {
             using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -30,7 +37,10 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Updates all settings
+        /// <summary>
+        /// Updates all settings in database
+        /// </summary>
+        /// <param name="settings">List of settings to be updated in database</param>
         public void UpdateAllSettings(List<Setting> settings)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))

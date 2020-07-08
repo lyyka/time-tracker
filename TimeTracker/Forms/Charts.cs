@@ -14,7 +14,6 @@ namespace TimeTracker.Forms
 {
     public partial class Charts : Form
     {
-        List<Entry> entries; // Entries that will be shown in chart_pb
         public Charts()
         {
             InitializeComponent();
@@ -22,6 +21,9 @@ namespace TimeTracker.Forms
 
         private void Charts_Load(object sender, EventArgs e)
         {
+            // Icon
+            this.Icon = Properties.Resources.stopwatch_icon;
+
             to_DTP.Format = from_DTP.Format = DateTimePickerFormat.Custom;
             to_DTP.CustomFormat = from_DTP.CustomFormat = "hh:mm:ss, dd/MMM/yyyy";
 
@@ -30,7 +32,7 @@ namespace TimeTracker.Forms
             from_DTP.Value = DateTime.Now.AddDays(-7);
 
             // Load projects into dropdown on top of form
-            LoadProjects((new ProjectsController()).GetAllProjects());
+            Helper.LoadProjects((new ProjectsController()).GetAllProjects(), project_cb);
             
             // Set the size to be min size
             this.MinimumSize = this.Size;
@@ -43,23 +45,13 @@ namespace TimeTracker.Forms
             SetUpChart();
         }
 
-        // Load projects into combobox
-        public void LoadProjects(List<Project> projects)
-        {
-            project_cb.Items.Clear();
-            project_cb.Items.Add("");
-            for (int i = 0; i < projects.Count; i++)
-            {
-                project_cb.Items.Add(projects[i].project_name);
-            }
-        }
 
         // Apply filters to the chart
         private void applyFilters_btn_Click(object sender, EventArgs e)
         {
-            if(to_DTP.Value.Subtract(from_DTP.Value).TotalDays > 30)
+            if(to_DTP.Value.Subtract(from_DTP.Value).TotalDays > 180)
             {
-                MessageBox.Show("You can't draw a chart for over 30 days. Please use interval that is less then or equal to 30 days.");
+                MessageBox.Show("You can't draw a chart for over 180 days. Please use interval that is less then or equal to 180 days.");
             }
             else
             {
@@ -67,7 +59,9 @@ namespace TimeTracker.Forms
             }
         }
 
-        // Sets the chart up and filters data
+        /// <summary>
+        /// Filters entries and displays them in the chart control
+        /// </summary>
         private void SetUpChart()
         {
             // Set up the filter
@@ -87,13 +81,10 @@ namespace TimeTracker.Forms
 
             // Get entries from db based on filter
             // This list is being sorted in procedure by start_time ascending
-            entries = (new Controllers.EntriesController()).FilterEntriesForChart(filter);
+            List<Entry> entries = (new Controllers.EntriesController()).FilterEntriesForChart(filter);
 
             if(entries.Count > 0)
             {
-                // Get List of chart points for entries list
-                List<ChartPoint> chartPoints = new List<ChartPoint>();
-
                 // Current chart point that will accumulate data for specific day
                 ChartPoint current_point = new ChartPoint();
                 for (int i = 0; i < entries.Count; i++)
@@ -107,8 +98,9 @@ namespace TimeTracker.Forms
                     // If point is set, but the day has changed
                     else if (entries[i].start_time.DayOfYear != current_point.date.DayOfYear)
                     {
-                        chartPoints.Add(current_point);
                         chartControl.Series["Hours/day"].Points.AddXY(current_point.date.ToShortDateString(), current_point.total_hours);
+
+                        current_point.total_hours = 0;
                         current_point.date = entries[i].start_time;
                     }
 
@@ -116,23 +108,7 @@ namespace TimeTracker.Forms
 
                     // -- Convert to non-nullable DateTime object
                     current_point.total_hours += ((DateTime)entries[i].end_time).Subtract(entries[i].start_time).TotalHours;
-
-                    if (entries[i].hourly_rate > 0)
-                    {
-                        // If we already have the currency in dictionary, just increment it
-                        if (current_point.total_earnings.ContainsKey(entries[i].currency))
-                        {
-                            current_point.total_earnings[entries[i].currency] += entries[i].CalculateEarnings();
-                        }
-                        // If we don't have this currency, initialize it
-                        else
-                        {
-                            current_point.total_earnings.Add(entries[i].currency, entries[i].CalculateEarnings());
-
-                        }
-                    }
                 }
-                chartPoints.Add(current_point);
                 chartControl.Series["Hours/day"].Points.AddXY(current_point.date.ToShortDateString(), current_point.total_hours);
             }
             else

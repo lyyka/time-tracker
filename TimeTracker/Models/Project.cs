@@ -16,13 +16,18 @@ namespace TimeTracker
         public string currency { get; set; }
         public DateTime created_at { get; set; }
 
+        /// <summary>
+        /// Gets all time entries tied to the project.
+        /// </summary>
+        /// <returns></returns>
         public List<Entry> Entries()
         {
             return (new EntriesController()).FindProjectEntries(this.id);
         }
 
-        // Saves model to db if it is not saved already
-        // If it is already in db, updates it with models current info
+        /// <summary>
+        /// Saves project in database. If project already exists, it will get updated.
+        /// </summary>
         public void Save()
         {
             if(id > 0)
@@ -35,6 +40,9 @@ namespace TimeTracker
             }
         }
 
+        /// <summary>
+        /// If project exists in the database, it gets deleted.
+        /// </summary>
         public void Delete()
         {
             if(id > 0)

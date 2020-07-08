@@ -29,20 +29,18 @@ namespace TimeTracker
         // On form load
         private void Main_Load(object sender, EventArgs e)
         {
-            // Set stopwatch image properties
+            // Icon
+            this.Icon = Properties.Resources.stopwatch_icon;
+
+            // Set menu images
             logo_pb.BackgroundImage = Properties.Resources.stopwatch;
-
-            // Set settings image properties
             settings_pb.BackgroundImage = Properties.Resources.settings;
-
-            // Set project image properties
             project_pb.BackgroundImage = Properties.Resources.project;
-
-            // Set charts image properties
             charts_pb.BackgroundImage = Properties.Resources.chart;
+            earnings_pb.BackgroundImage = Properties.Resources.finance;
 
             // Load projects into dropdown on top of form
-            LoadProjects((new ProjectsController()).GetAllProjects());
+            Helper.LoadProjects((new ProjectsController()).GetAllProjects(), projects_cb);
 
             // Set min size of form
             this.MinimumSize = this.Size;
@@ -55,18 +53,16 @@ namespace TimeTracker
             PopulateEntries(entries);
         }
 
-        // Loads projects into a dropdown on top of form. Can be called from ProjectsManagement after new project is created.
+        // Is called from Projects Management to update projects combobox
         public void LoadProjects(List<Project> projects)
         {
-            projects_cb.Items.Clear();
-            projects_cb.Items.Add("");
-            for (int i = 0; i < projects.Count; i++)
-            {
-                projects_cb.Items.Add(projects[i].project_name);
-            }
+            Helper.LoadProjects(projects, projects_cb);
         }
 
-        // Populates entries panel with entries
+        /// <summary>
+        /// Populates panel on Main form with entries and data.
+        /// </summary>
+        /// <param name="entries">List of entries to be put into panel</param>
         private void PopulateEntries(List<Entry> entries)
         {
             entriesWrap_panel.Controls.Clear();
@@ -80,17 +76,24 @@ namespace TimeTracker
             }
             else
             {
-                MessageBox.Show("No time entries are found");
+                //MessageBox.Show("No time entries are found");
             }
         }
 
-        // Calculates the position of the input below a label in entry-card
+        /// <summary>
+        /// Calculates the position of element under any label
+        /// </summary>
+        /// <param name="lb">Label beneath which the element will be placed</param>
+        /// <returns>Point object with x and y coordinates</returns>
         private Point CalculateUnderLabelPos(Label lb)
         {
             return new Point(lb.Location.X, lb.Location.Y + lb.Height);
         }
 
-        // Adds one entry to flow layout panel
+        /// <summary>
+        /// Adds one entry to FlowLayoutPanel.
+        /// </summary>
+        /// <param name="entry">Entry to be added</param>
         private void AddEntry(Entry entry)
         {
             // Make card to hold the entry
@@ -339,9 +342,16 @@ namespace TimeTracker
             (new ProjectsManagement(this)).Show();
         }
 
+        // Open charts form
         private void charts_pb_Click(object sender, EventArgs e)
         {
             (new Charts()).Show();
+        }
+
+        // Open earnings form
+        private void earnings_pb_Click(object sender, EventArgs e)
+        {
+            (new Earnings()).Show();
         }
 
         // Start/Stop timer

@@ -138,7 +138,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Charts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Charts";
+            this.Text = "Time chart";
             this.Load += new System.EventHandler(this.Charts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartControl)).EndInit();
             this.ResumeLayout(false);

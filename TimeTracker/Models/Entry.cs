@@ -20,6 +20,10 @@ namespace TimeTracker
         public int hourly_rate { get; set; }
         public string currency { get; set; }
 
+        /// <summary>
+        /// Get the project this entry refers to. If no such project exists, it returns null.
+        /// </summary>
+        /// <returns></returns>
         public Project Project()
         {
             if(this.project_id > 0)
@@ -32,8 +36,9 @@ namespace TimeTracker
             }
         }
 
-        // Saves model to db if it is not saved already
-        // If it is already in db, updates it with models current info
+        /// <summary>
+        /// Saves entry in database. If entry already exists, it will get updated.
+        /// </summary>
         public void Save()
         {
             if(this.id > 0)
@@ -46,6 +51,9 @@ namespace TimeTracker
             }
         }
 
+        /// <summary>
+        /// If project exists in the database, it gets deleted.
+        /// </summary>
         public void Delete()
         {
             if (id > 0)
@@ -54,6 +62,10 @@ namespace TimeTracker
             }
         }
 
+        /// <summary>
+        /// Calculates earnings for this entry based on time span and hourly rate.
+        /// </summary>
+        /// <returns></returns>
         public double CalculateEarnings()
         {
             DateTime moment;

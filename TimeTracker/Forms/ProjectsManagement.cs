@@ -26,11 +26,17 @@ namespace TimeTracker
         // On Form load
         private void ProjectsManagement_Load(object sender, EventArgs e)
         {
+            // Icon
+            this.Icon = Properties.Resources.stopwatch_icon;
+
             this.MinimumSize = this.Size;
             UpdateBindings();
         }
 
-        // Updates ListBox with all projects from db (useful after onLoad/insert/update)
+        /// <summary>
+        /// Updates ListBox with all projects from db (useful after onLoad/insert/update)
+        /// </summary>
+        /// <returns>New list of projects objects</returns>
         private List<Project> UpdateBindings()
         {
             ProjectsController db = new ProjectsController();

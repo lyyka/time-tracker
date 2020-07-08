@@ -12,18 +12,22 @@ namespace TimeTracker.Controllers
 {
     public class ProjectsController : Controller
     {
-        //string db_name = "time_tracker";
-
-        // -- Create new project
+        /// <summary>
+        /// Inserts specified project in database.
+        /// </summary>
+        /// <param name="project">Project object to be saved</param>
         public void AddProject(Project project)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
             {
-                conn.Execute("dbo.Project_Insert @project_name", project);
+                conn.Execute("dbo.Project_Insert @project_name, @hourly_rate, @currency", project);
             };
         }
 
-        // -- Upadte a project
+        /// <summary>
+        /// Updates specified project in database.
+        /// </summary>
+        /// <param name="project">Project object to be updated</param>
         public void UpdateProject(Project project)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -32,7 +36,10 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Delte a project
+        /// <summary>
+        /// Deletes specified project in database.
+        /// </summary>
+        /// <param name="project">Project object to be deleted</param>
         public void DeleteProject(Project project)
         {
             using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -41,7 +48,10 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Get all projects from db
+        /// <summary>
+        /// Gets all projects from database.
+        /// </summary>
+        /// <returns>List of projects</returns>
         public List<Project> GetAllProjects()
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -50,7 +60,11 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Find project by id
+        /// <summary>
+        /// Finds project by it's ID.
+        /// </summary>
+        /// <param name="id">ID of the project to find in database</param>
+        /// <returns>Project object if it exists, otherwise null</returns>
         public Project FindProject(int id)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -60,7 +74,11 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Find project by it's name
+        /// <summary>
+        /// Finds project by it's name.
+        /// </summary>
+        /// <param name="project_name">Name of the project to look up in database</param>
+        /// <returns>Project object if it exists, otherwise null</returns>
         public Project FindProjectByName(string project_name)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))

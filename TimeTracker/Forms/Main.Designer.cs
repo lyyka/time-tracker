@@ -45,12 +45,14 @@
             this.entryEarnings_lb = new System.Windows.Forms.Label();
             this.entriesWrap_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.earnings_pb = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).BeginInit();
             this.SuspendLayout();
             // 
             // desc_tb
@@ -100,6 +102,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.earnings_pb);
             this.panel1.Controls.Add(this.charts_pb);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.settings_pb);
@@ -218,6 +221,17 @@
             this.panel2.Size = new System.Drawing.Size(774, 93);
             this.panel2.TabIndex = 0;
             // 
+            // earnings_pb
+            // 
+            this.earnings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.earnings_pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.earnings_pb.Location = new System.Drawing.Point(33, 267);
+            this.earnings_pb.Name = "earnings_pb";
+            this.earnings_pb.Size = new System.Drawing.Size(32, 32);
+            this.earnings_pb.TabIndex = 5;
+            this.earnings_pb.TabStop = false;
+            this.earnings_pb.Click += new System.EventHandler(this.earnings_pb_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,6 +254,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -262,6 +277,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox charts_pb;
+        private System.Windows.Forms.PictureBox earnings_pb;
     }
 }
 

@@ -13,7 +13,10 @@ namespace TimeTracker.Controllers
 {
     public class EntriesController : Controller
     {
-        // -- Add new time entry
+        /// <summary>
+        /// Inserts specified entry in database.
+        /// </summary>
+        /// <param name="new_entry">Entry object to be saved</param>
         public void AddEntry(Entry new_entry)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -30,7 +33,10 @@ namespace TimeTracker.Controllers
 
         }
 
-        // -- Delete entry
+        /// <summary>
+        /// Deletes specified entry.
+        /// </summary>
+        /// <param name="entry">Entry object to be deleted</param>
         public void DeleteEntry(Entry entry)
         {
             using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -39,7 +45,10 @@ namespace TimeTracker.Controllers
             }
         }
 
-        // -- Update entry
+        /// <summary>
+        /// Updates specified entry.
+        /// </summary>
+        /// <param name="entry">Entry object to be updated</param>
         public void UpdateEntry(Entry entry)
         {
             using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -55,7 +64,10 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Get all entries
+        /// <summary>
+        /// Gets all entries from database.
+        /// </summary>
+        /// <param name="sort">Optional parameter. Sort object to be applied to SQL query.</param>
         public List<Entry> GetAllEntries(Sort sort = null)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -71,7 +83,11 @@ namespace TimeTracker.Controllers
             };
         }
 
-        // -- Get all entries for specific project by id
+        /// <summary>
+        /// Gets all entries for specified project.
+        /// </summary>
+        /// <param name="project_id">ID of the project to get entries for</param>
+        /// <returns></returns>
         public List<Entry> FindProjectEntries(int project_id)
         {
             using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
@@ -82,6 +98,11 @@ namespace TimeTracker.Controllers
 
         // -- Filter entries for chart
         // -- -- Returns entries in a time span, sorted by start_time
+        /// <summary>
+        /// Filters entries by date and project. Returns list sorted by start_time.
+        /// </summary>
+        /// <param name="filter">Filter object to be applied to query</param>
+        /// <returns></returns>
         public List<Entry> FilterEntriesForChart(EntriesFilter filter)
         {
             using(IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
