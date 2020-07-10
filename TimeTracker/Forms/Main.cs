@@ -31,6 +31,10 @@ namespace TimeTracker
         {
             // Icon
             this.Icon = Properties.Resources.stopwatch_icon;
+            systemTrayIcon.Icon = Properties.Resources.stopwatch_icon;
+            systemTrayMenu.Items["exitMenuItem"].Click += new EventHandler(delegate (Object o, EventArgs a) {
+                Application.Exit();
+            });
 
             // Set menu images
             logo_pb.BackgroundImage = Properties.Resources.stopwatch;
@@ -38,6 +42,7 @@ namespace TimeTracker
             project_pb.BackgroundImage = Properties.Resources.project;
             charts_pb.BackgroundImage = Properties.Resources.chart;
             earnings_pb.BackgroundImage = Properties.Resources.finance;
+            closeForm_pb.BackgroundImage = Properties.Resources.close;
 
             // Load projects into dropdown on top of form
             Helper.LoadProjects((new ProjectsController()).GetAllProjects(), projects_cb);
@@ -352,6 +357,26 @@ namespace TimeTracker
         private void earnings_pb_Click(object sender, EventArgs e)
         {
             (new Earnings()).Show();
+        }
+
+        // Close form
+        private void closeForm_pb_Click(object sender, EventArgs e)
+        {
+            int minimize = Convert.ToInt32((new SettingsController()).GetSetting("minimize_to_tray").value);
+            if(minimize == 0)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                Hide();
+            }
+        }
+
+        // Open up the app
+        private void systemTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
         }
 
         // Start/Stop timer

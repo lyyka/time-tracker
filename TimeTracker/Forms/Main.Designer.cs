@@ -35,6 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.closeForm_pb = new System.Windows.Forms.PictureBox();
+            this.earnings_pb = new System.Windows.Forms.PictureBox();
             this.charts_pb = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.settings_pb = new System.Windows.Forms.PictureBox();
@@ -45,14 +47,18 @@
             this.entryEarnings_lb = new System.Windows.Forms.Label();
             this.entriesWrap_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.earnings_pb = new System.Windows.Forms.PictureBox();
+            this.systemTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.systemTrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.project_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).BeginInit();
+            this.systemTrayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // desc_tb
@@ -102,6 +108,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.closeForm_pb);
             this.panel1.Controls.Add(this.earnings_pb);
             this.panel1.Controls.Add(this.charts_pb);
             this.panel1.Controls.Add(this.label3);
@@ -113,6 +120,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(99, 566);
             this.panel1.TabIndex = 6;
+            // 
+            // closeForm_pb
+            // 
+            this.closeForm_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.closeForm_pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.closeForm_pb.Location = new System.Drawing.Point(33, 522);
+            this.closeForm_pb.Name = "closeForm_pb";
+            this.closeForm_pb.Size = new System.Drawing.Size(32, 32);
+            this.closeForm_pb.TabIndex = 6;
+            this.closeForm_pb.TabStop = false;
+            this.closeForm_pb.Click += new System.EventHandler(this.closeForm_pb_Click);
+            // 
+            // earnings_pb
+            // 
+            this.earnings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.earnings_pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.earnings_pb.Location = new System.Drawing.Point(33, 267);
+            this.earnings_pb.Name = "earnings_pb";
+            this.earnings_pb.Size = new System.Drawing.Size(32, 32);
+            this.earnings_pb.TabIndex = 5;
+            this.earnings_pb.TabStop = false;
+            this.earnings_pb.Click += new System.EventHandler(this.earnings_pb_Click);
             // 
             // charts_pb
             // 
@@ -221,16 +250,25 @@
             this.panel2.Size = new System.Drawing.Size(774, 93);
             this.panel2.TabIndex = 0;
             // 
-            // earnings_pb
+            // systemTrayIcon
             // 
-            this.earnings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.earnings_pb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.earnings_pb.Location = new System.Drawing.Point(33, 267);
-            this.earnings_pb.Name = "earnings_pb";
-            this.earnings_pb.Size = new System.Drawing.Size(32, 32);
-            this.earnings_pb.TabIndex = 5;
-            this.earnings_pb.TabStop = false;
-            this.earnings_pb.Click += new System.EventHandler(this.earnings_pb_Click);
+            this.systemTrayIcon.ContextMenuStrip = this.systemTrayMenu;
+            this.systemTrayIcon.Text = "Time Tracker - Tray";
+            this.systemTrayIcon.Visible = true;
+            this.systemTrayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.systemTrayIcon_MouseDoubleClick);
+            // 
+            // systemTrayMenu
+            // 
+            this.systemTrayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitMenuItem});
+            this.systemTrayMenu.Name = "systemTrayMenu";
+            this.systemTrayMenu.Size = new System.Drawing.Size(94, 26);
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitMenuItem.Text = "Exit";
             // 
             // Main
             // 
@@ -238,6 +276,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(873, 566);
+            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.entriesWrap_panel);
             this.Controls.Add(this.panel1);
@@ -248,13 +287,15 @@
             this.Text = "Time Tracker";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.project_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo_pb)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).EndInit();
+            this.systemTrayMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -278,6 +319,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox charts_pb;
         private System.Windows.Forms.PictureBox earnings_pb;
+        private System.Windows.Forms.PictureBox closeForm_pb;
+        private System.Windows.Forms.NotifyIcon systemTrayIcon;
+        private System.Windows.Forms.ContextMenuStrip systemTrayMenu;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
     }
 }
 
