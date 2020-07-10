@@ -83,6 +83,9 @@ namespace TimeTracker.Forms
             // This list is being sorted in procedure by start_time ascending
             List<Entry> entries = (new Controllers.EntriesController()).FilterEntriesForChart(filter);
 
+            int no_of_points = 0;
+            double maxHours = 0, minHours = double.MaxValue, sumHours = 0;
+
             if(entries.Count > 0)
             {
                 // Current chart point that will accumulate data for specific day
@@ -98,7 +101,7 @@ namespace TimeTracker.Forms
                     // If point is set, but the day has changed
                     else if (entries[i].start_time.DayOfYear != current_point.date.DayOfYear)
                     {
-                        chartControl.Series["Hours/day"].Points.AddXY(current_point.date.ToShortDateString(), current_point.total_hours);
+                        AddPointToChart(current_point, ref no_of_points, ref sumHours, ref maxHours, ref minHours);
 
                         current_point.total_hours = 0;
                         current_point.date = entries[i].start_time;
@@ -109,11 +112,35 @@ namespace TimeTracker.Forms
                     // -- Convert to non-nullable DateTime object
                     current_point.total_hours += ((DateTime)entries[i].end_time).Subtract(entries[i].start_time).TotalHours;
                 }
-                chartControl.Series["Hours/day"].Points.AddXY(current_point.date.ToShortDateString(), current_point.total_hours);
+                AddPointToChart(current_point, ref no_of_points, ref sumHours, ref maxHours, ref minHours);
+
+                if(no_of_points > 0)
+                {
+                    avgHours_lb.Text = Math.Round(sumHours / no_of_points, 2).ToString() + "h";
+                    minHours_lb.Text = Math.Round(minHours, 2).ToString() + "h";
+                    maxHours_lb.Text = Math.Round(maxHours, 2).ToString() + "h";
+                }
             }
             else
             {
                 MessageBox.Show("No entries found for specified filters.");
+            }
+        }
+
+        private void AddPointToChart(ChartPoint point, ref int no_of_points, ref double sumHours, ref double maxHours, ref double minHours)
+        {
+            chartControl.Series["Hours/day"].Points.AddXY(point.date.ToShortDateString(), point.total_hours);
+
+            // Calcs again
+            no_of_points++;
+            sumHours += point.total_hours;
+            if (point.total_hours > maxHours)
+            {
+                maxHours = point.total_hours;
+            }
+            else if (point.total_hours < minHours)
+            {
+                minHours = point.total_hours;
             }
         }
     }

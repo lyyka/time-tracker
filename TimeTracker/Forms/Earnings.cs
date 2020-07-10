@@ -151,7 +151,7 @@ namespace TimeTracker.Forms
                 }
             }
 
-            // Remove Points from before
+            // Remove Points from before for all currencies (series)
             for(int i = 0; i < chartControl.Series.Count; i++)
             {
                 chartControl.Series[i].Points.Clear();
@@ -159,7 +159,7 @@ namespace TimeTracker.Forms
 
             // Get entries from db based on filter
             // This list is being sorted in procedure by start_time ascending
-            List<Entry> entries = (new Controllers.EntriesController()).FilterEntriesForChart(filter);
+            List<Entry> entries = (new EntriesController()).FilterEntriesForChart(filter);
 
             if(entries.Count > 0)
             {

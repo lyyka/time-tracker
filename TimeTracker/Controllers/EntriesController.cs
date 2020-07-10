@@ -55,11 +55,11 @@ namespace TimeTracker.Controllers
             {
                 if(entry.project_id > 0)
                 {
-                    conn.Execute("dbo.Entry_Update @start_time, @end_time, @description, @hourly_rate, @currency, @project_id", entry);
+                    conn.Execute("dbo.Entry_Update @id, @start_time, @end_time, @description, @hourly_rate, @currency, @project_id", entry);
                 }
                 else
                 {
-                    conn.Execute("dbo.Entry_Update @start_time, @end_time, @description, @hourly_rate, @currency", entry);
+                    conn.Execute("dbo.Entry_Update @id, @start_time, @end_time, @description, @hourly_rate, @currency", entry);
                 }
             };
         }
@@ -115,6 +115,33 @@ namespace TimeTracker.Controllers
                 {
                     return conn.Query<Entry>("dbo.Entry_Filter @from_date, @to_date", filter).ToList();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Will filter entries on Main.cs and automatically sort them by id-asc, as in Main.cs entries are added in reverse order then they are in list.
+        /// </summary>
+        /// <param name="filter">Filter object to be applied to query</param>
+        /// <returns></returns>
+        public List<Entry> FilterEntriesMain(EntriesFilter filter)
+        {
+            using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                string query = "dbo.Entry_FilterMain ";
+                if(filter.from_date != DateTime.MinValue)
+                {
+                    query += "@form_date, ";
+                }
+                if(filter.to_date != DateTime.MinValue)
+                {
+                    query += "@to_date, ";
+                }
+                if(filter.project_id > 0)
+                {
+                    query += "@project_id, ";
+                }
+                query = query.Substring(0, query.Length - 2);
+                return conn.Query<Entry>(query, filter).ToList();
             }
         }
     }

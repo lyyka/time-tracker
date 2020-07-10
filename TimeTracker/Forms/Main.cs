@@ -45,7 +45,9 @@ namespace TimeTracker
             closeForm_pb.BackgroundImage = Properties.Resources.close;
 
             // Load projects into dropdown on top of form
-            Helper.LoadProjects((new ProjectsController()).GetAllProjects(), projects_cb);
+            List<Project> all_projects = (new ProjectsController()).GetAllProjects();
+            Helper.LoadProjects(all_projects, projects_cb);
+            Helper.LoadProjects(all_projects, projectFilter_cb);
 
             // Set min size of form
             this.MinimumSize = this.Size;
@@ -377,6 +379,36 @@ namespace TimeTracker
         private void systemTrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
+        }
+
+        // Project filter change
+        private void projectFilter_cb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Set up the filter
+            EntriesFilter filter = new EntriesFilter(DateTime.MinValue, DateTime.MinValue);
+            if (projectFilter_cb.SelectedItem != null)
+            {
+                string project_name = projectFilter_cb.SelectedItem.ToString();
+                Project project = (new Controllers.ProjectsController()).FindProjectByName(project_name);
+                if (project != null)
+                {
+                    filter.project_id = project.id;
+                }
+            }
+
+
+        }
+
+        // To date filter changed
+        private void toFilter_DTP_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // From date filter changed
+        private void fromFilter_DTP_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
         // Start/Stop timer

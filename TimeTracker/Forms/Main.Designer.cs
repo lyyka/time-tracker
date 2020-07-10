@@ -47,9 +47,16 @@
             this.entryEarnings_lb = new System.Windows.Forms.Label();
             this.entriesWrap_panel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.systemTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.systemTrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromFilter_DTP = new System.Windows.Forms.DateTimePicker();
+            this.toFilter_DTP = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.projectFilter_cb = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).BeginInit();
@@ -118,14 +125,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(99, 566);
+            this.panel1.Size = new System.Drawing.Size(99, 665);
             this.panel1.TabIndex = 6;
             // 
             // closeForm_pb
             // 
             this.closeForm_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.closeForm_pb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.closeForm_pb.Location = new System.Drawing.Point(33, 522);
+            this.closeForm_pb.Location = new System.Drawing.Point(33, 602);
             this.closeForm_pb.Name = "closeForm_pb";
             this.closeForm_pb.Size = new System.Drawing.Size(32, 32);
             this.closeForm_pb.TabIndex = 6;
@@ -228,15 +235,16 @@
             this.entriesWrap_panel.AutoScroll = true;
             this.entriesWrap_panel.BackColor = System.Drawing.Color.White;
             this.entriesWrap_panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.entriesWrap_panel.Location = new System.Drawing.Point(99, 91);
+            this.entriesWrap_panel.Location = new System.Drawing.Point(99, 160);
             this.entriesWrap_panel.Name = "entriesWrap_panel";
             this.entriesWrap_panel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.entriesWrap_panel.Size = new System.Drawing.Size(774, 475);
+            this.entriesWrap_panel.Size = new System.Drawing.Size(774, 505);
             this.entriesWrap_panel.TabIndex = 0;
             this.entriesWrap_panel.WrapContents = false;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.entryEarnings_lb);
             this.panel2.Controls.Add(this.desc_tb);
@@ -249,6 +257,14 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(774, 93);
             this.panel2.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label7.Location = new System.Drawing.Point(0, 91);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(774, 2);
+            this.label7.TabIndex = 7;
             // 
             // systemTrayIcon
             // 
@@ -270,13 +286,71 @@
             this.exitMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitMenuItem.Text = "Exit";
             // 
+            // fromFilter_DTP
+            // 
+            this.fromFilter_DTP.Location = new System.Drawing.Point(105, 119);
+            this.fromFilter_DTP.Name = "fromFilter_DTP";
+            this.fromFilter_DTP.Size = new System.Drawing.Size(200, 20);
+            this.fromFilter_DTP.TabIndex = 7;
+            this.fromFilter_DTP.ValueChanged += new System.EventHandler(this.fromFilter_DTP_ValueChanged);
+            // 
+            // toFilter_DTP
+            // 
+            this.toFilter_DTP.Location = new System.Drawing.Point(409, 119);
+            this.toFilter_DTP.Name = "toFilter_DTP";
+            this.toFilter_DTP.Size = new System.Drawing.Size(200, 20);
+            this.toFilter_DTP.TabIndex = 8;
+            this.toFilter_DTP.ValueChanged += new System.EventHandler(this.toFilter_DTP_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(105, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "From:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(406, 103);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(23, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "To:";
+            // 
+            // projectFilter_cb
+            // 
+            this.projectFilter_cb.FormattingEnabled = true;
+            this.projectFilter_cb.Location = new System.Drawing.Point(711, 118);
+            this.projectFilter_cb.Name = "projectFilter_cb";
+            this.projectFilter_cb.Size = new System.Drawing.Size(150, 21);
+            this.projectFilter_cb.TabIndex = 10;
+            this.projectFilter_cb.SelectedIndexChanged += new System.EventHandler(this.projectFilter_cb_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(708, 103);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Narrow to project:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(873, 566);
+            this.ClientSize = new System.Drawing.Size(873, 665);
             this.ControlBox = false;
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.projectFilter_cb);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.toFilter_DTP);
+            this.Controls.Add(this.fromFilter_DTP);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.entriesWrap_panel);
             this.Controls.Add(this.panel1);
@@ -297,6 +371,7 @@
             this.panel2.PerformLayout();
             this.systemTrayMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -323,6 +398,13 @@
         private System.Windows.Forms.NotifyIcon systemTrayIcon;
         private System.Windows.Forms.ContextMenuStrip systemTrayMenu;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.DateTimePicker fromFilter_DTP;
+        private System.Windows.Forms.DateTimePicker toFilter_DTP;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox projectFilter_cb;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
 
