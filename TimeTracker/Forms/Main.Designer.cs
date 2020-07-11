@@ -119,7 +119,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.panel1.Controls.Add(this.contacts_pb);
             this.panel1.Controls.Add(this.closeForm_pb);
             this.panel1.Controls.Add(this.earnings_pb);

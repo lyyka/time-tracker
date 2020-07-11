@@ -73,7 +73,7 @@
             // 
             // displayProject_panel
             // 
-            this.displayProject_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.displayProject_panel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.displayProject_panel.Controls.Add(this.displayCurrency_tb);
             this.displayProject_panel.Controls.Add(this.label5);
             this.displayProject_panel.Controls.Add(this.displayHourlyRate_nud);

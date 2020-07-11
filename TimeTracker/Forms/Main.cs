@@ -427,16 +427,8 @@ namespace TimeTracker
         private void filter_btn_Click(object sender, EventArgs e)
         {
             // Set up the filter
-            EntriesFilter filter = new EntriesFilter(fromFilter_DTP.Value, toFilter_DTP.Value);
-            if (projectFilter_cb.SelectedItem != null)
-            {
-                string project_name = projectFilter_cb.SelectedItem.ToString();
-                Project project = (new Controllers.ProjectsController()).FindProjectByName(project_name);
-                if (project != null)
-                {
-                    filter.project_id = project.id;
-                }
-            }
+            EntriesFilter filter = Helper.GenerateFilter(fromFilter_DTP, toFilter_DTP, projects_cb);
+
             List<Entry> entries = (new EntriesController()).FilterEntriesMain(filter);
 
             PopulateEntries(entries);

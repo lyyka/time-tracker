@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Classes\ChartPoint.cs" />
     <Compile Include="Classes\EntriesFilter.cs" />
+    <Compile Include="Classes\Report.cs" />
     <Compile Include="Classes\Sort.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\Controller.cs" />

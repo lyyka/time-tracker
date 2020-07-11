@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Windows.Forms;
 
+using TimeTracker.Classes;
+
 namespace TimeTracker
 {
     public static class Helper
@@ -69,6 +71,21 @@ namespace TimeTracker
             {
                 cb.Items.Add(projects[i].project_name);
             }
+        }
+
+        public static EntriesFilter GenerateFilter(DateTimePicker from, DateTimePicker to, ComboBox cb)
+        {
+            EntriesFilter filter = new EntriesFilter(from.Value, to.Value);
+            if (cb.SelectedItem != null)
+            {
+                string project_name = cb.SelectedItem.ToString();
+                Project project = (new Controllers.ProjectsController()).FindProjectByName(project_name);
+                if (project != null)
+                {
+                    filter.project_id = project.id;
+                }
+            }
+            return filter;
         }
     }
 }

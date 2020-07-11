@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using TimeTracker.Models;
 using TimeTracker.Controllers;
+using TimeTracker.Classes;
 
 namespace TimeTracker.Forms
 {
@@ -29,6 +30,14 @@ namespace TimeTracker.Forms
             // Form setup
             this.MinimumSize = this.Size;
             this.Icon = Properties.Resources.stopwatch_icon;
+
+            // Datetime picker formats
+            to_DTP.Format = from_DTP.Format = DateTimePickerFormat.Custom;
+            to_DTP.CustomFormat = from_DTP.CustomFormat = "hh:mm:ss, dd/MMM/yyyy";
+
+            // Load projects
+            List<Project> projects = (new ProjectsController()).GetAllProjects();
+            Helper.LoadProjects(projects, projects_cb);
 
             // Load contacts
             contacts = new List<Contact>();
@@ -73,6 +82,9 @@ namespace TimeTracker.Forms
             Contact selected = (Contact)contacts_lb.SelectedItem;
             if(selected != null)
             {
+                sendReport_label.Text = $"Send report to {selected.name}";
+                sendReport_panel.Show();
+
                 selected_contact = selected;
                 updateContact_grpbox.Enabled = true;
                 updateName_tb.Text = selected.name;
@@ -80,6 +92,7 @@ namespace TimeTracker.Forms
             }
             else
             {
+                sendReport_panel.Hide();
                 updateContact_grpbox.Enabled = false;
             }
         }
@@ -145,6 +158,37 @@ namespace TimeTracker.Forms
                 selected_contact.Delete();
                 updateName_tb.Text = updateEmail_tb.Text = "";
                 UpdateBindings();
+            }
+        }
+
+        // Filter entries and send the report
+        private void sendReport_btn_Click(object sender, EventArgs e)
+        {
+            if(selected_contact != null)
+            {
+                // Set up the filter
+                EntriesFilter filter = Helper.GenerateFilter(from_DTP, to_DTP, projects_cb);
+                
+
+                // Get entries from db based on filter
+                // This list is being sorted in procedure by start_time ascending
+                List<Entry> entries = (new Controllers.EntriesController()).FilterEntriesForChart(filter);
+
+                // Report
+                Report rep = new Report(selected_contact, entries);
+                bool sent = rep.Send();
+                if (sent)
+                {
+                    MessageBox.Show($"Report is sent successfully to {selected_contact.email}");
+                }
+                else
+                {
+                    MessageBox.Show($"Error sending report to {selected_contact.email}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select contact to send to the report first");
             }
         }
     }

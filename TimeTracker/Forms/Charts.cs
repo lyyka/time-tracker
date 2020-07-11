@@ -65,16 +65,7 @@ namespace TimeTracker.Forms
         private void SetUpChart()
         {
             // Set up the filter
-            EntriesFilter filter = new EntriesFilter(from_DTP.Value, to_DTP.Value);
-            if (project_cb.SelectedItem != null)
-            {
-                string project_name = project_cb.SelectedItem.ToString();
-                Project project = (new Controllers.ProjectsController()).FindProjectByName(project_name);
-                if (project != null)
-                {
-                    filter.project_id = project.id;
-                }
-            }
+            EntriesFilter filter = Helper.GenerateFilter(from_DTP, to_DTP, project_cb);
 
             // Remove Points from before
             chartControl.Series["Hours/day"].Points.Clear();
