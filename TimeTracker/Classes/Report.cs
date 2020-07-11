@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+
+using System.Net;
+using System.Net.Mail;
 
 using TimeTracker.Classes;
+using TimeTracker.Controllers;
 using TimeTracker.Models;
 
 using Microsoft.Office.Interop.Excel;
@@ -16,12 +21,14 @@ namespace TimeTracker.Classes
     {
         Contact receiver { get; set; }
         string message { get; set; }
+        EntriesFilter filter;
         List<Entry> entries { get; set; }
 
-        public Report(Contact receiver, List<Entry> entries)
+        public Report(Contact receiver, EntriesFilter filter, List<Entry> entries)
         {
             this.receiver = receiver;
             this.entries = entries;
+            this.filter = filter;
         }
 
         public bool Send()
@@ -29,10 +36,42 @@ namespace TimeTracker.Classes
             if(receiver != null && entries.Count > 0)
             {
                 // TODO: Generate an Excel file with the report
-                GenerateExcel();
+                string file_name = GenerateExcel();
 
                 // TODO: Send an email with message and excel file as an attachment
-                
+                MailConfig config = new MailConfig(); // Config from App.config
+
+                MailMessage mail = new MailMessage();
+                SmtpClient client = new SmtpClient(config.server);
+                mail.From = new MailAddress(config.fromMail);
+                mail.To.Add(receiver.email);
+                mail.Subject = "Time tracker report";
+                mail.Body = $"Attached is an Excel table containing the activity (entries) report for time period from {filter.from_date.ToLongDateString()} to {filter.to_date.ToLongDateString()}";
+                if(filter.project_id > 0)
+                {
+                    mail.Body += " on project " + (new ProjectsController()).FindProject(filter.project_id).project_name + ".";
+                }
+                else
+                {
+                    mail.Body += ".";
+                }
+
+                Attachment attachment = new Attachment(AppDomain.CurrentDomain.BaseDirectory + file_name);
+                mail.Attachments.Add(attachment);
+
+                client.Port = Convert.ToInt32(config.port);
+                client.Credentials = new NetworkCredential(config.username, config.password);
+                client.EnableSsl = true;
+
+                client.Send(mail);
+                attachment.Dispose(); // Release the file so we can delete it after
+                client.Dispose();
+
+                if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + file_name))
+                {
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + file_name);
+                }
+
                 return true;
             }
             else
@@ -41,10 +80,10 @@ namespace TimeTracker.Classes
             }
         }
 
-        private void GenerateExcel()
+        private string GenerateExcel()
         {
             Application excel = new Application();
-            excel.Visible = excel.DisplayAlerts = false;
+            //excel.Visible = excel.DisplayAlerts = false;
 
             Workbook workBook = excel.Workbooks.Add(Type.Missing);
             Worksheet workSheet = (Worksheet)workBook.ActiveSheet;
@@ -78,9 +117,16 @@ namespace TimeTracker.Classes
             cellRange = workSheet.Range[workSheet.Cells[1,1] , workSheet.Cells[entries.Count + 1, properties.Count()]];
             cellRange.EntireColumn.AutoFit();
 
-            workBook.SaveAs(@"Report_" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".xlsx");
+            // Save to apps bin/Debug dir
+            string base_dir = AppDomain.CurrentDomain.BaseDirectory;
+            string filename = "Report_" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".xlsx";
+            workBook.SaveAs(AppDomain.CurrentDomain.BaseDirectory + filename);
+
+            // Close off the excel sheet
             workBook.Close();
             excel.Quit();
+
+            return filename;
         }
     }
 }

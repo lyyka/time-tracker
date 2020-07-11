@@ -61,6 +61,11 @@
             this.filter_btn = new System.Windows.Forms.Button();
             this.resetFilter_btn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contacts_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).BeginInit();
@@ -120,6 +125,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.contacts_pb);
             this.panel1.Controls.Add(this.closeForm_pb);
             this.panel1.Controls.Add(this.earnings_pb);
@@ -138,7 +148,7 @@
             // 
             this.contacts_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.contacts_pb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.contacts_pb.Location = new System.Drawing.Point(33, 316);
+            this.contacts_pb.Location = new System.Drawing.Point(33, 369);
             this.contacts_pb.Name = "contacts_pb";
             this.contacts_pb.Size = new System.Drawing.Size(32, 32);
             this.contacts_pb.TabIndex = 7;
@@ -160,7 +170,7 @@
             // 
             this.earnings_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.earnings_pb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.earnings_pb.Location = new System.Drawing.Point(33, 267);
+            this.earnings_pb.Location = new System.Drawing.Point(33, 306);
             this.earnings_pb.Name = "earnings_pb";
             this.earnings_pb.Size = new System.Drawing.Size(32, 32);
             this.earnings_pb.TabIndex = 5;
@@ -171,7 +181,7 @@
             // 
             this.charts_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.charts_pb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.charts_pb.Location = new System.Drawing.Point(33, 213);
+            this.charts_pb.Location = new System.Drawing.Point(33, 243);
             this.charts_pb.Name = "charts_pb";
             this.charts_pb.Size = new System.Drawing.Size(32, 32);
             this.charts_pb.TabIndex = 4;
@@ -201,7 +211,7 @@
             // 
             this.project_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.project_pb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.project_pb.Location = new System.Drawing.Point(33, 160);
+            this.project_pb.Location = new System.Drawing.Point(33, 180);
             this.project_pb.Name = "project_pb";
             this.project_pb.Size = new System.Drawing.Size(32, 32);
             this.project_pb.TabIndex = 2;
@@ -380,6 +390,66 @@
             this.label8.Size = new System.Drawing.Size(824, 2);
             this.label8.TabIndex = 10;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(21, 142);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 18);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Settings";
+            this.label9.Click += new System.EventHandler(this.settings_pb_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(18, 215);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(63, 18);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Projects";
+            this.label10.Click += new System.EventHandler(this.project_pb_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(26, 278);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 18);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Hours";
+            this.label11.Click += new System.EventHandler(this.charts_pb_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(19, 341);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 18);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "Earnings";
+            this.label12.Click += new System.EventHandler(this.earnings_pb_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(16, 404);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(68, 18);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "Contacts";
+            this.label13.Click += new System.EventHandler(this.contacts_pb_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,6 +476,7 @@
             this.Text = "Time Tracker";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contacts_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).EndInit();
@@ -455,6 +526,11 @@
         private System.Windows.Forms.Button resetFilter_btn;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox contacts_pb;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }
 

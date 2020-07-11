@@ -73,6 +73,13 @@ namespace TimeTracker
             }
         }
 
+        /// <summary>
+        /// Generates filter object for entries based on from and to dates and combobox with projects names
+        /// </summary>
+        /// <param name="from">Form control containing min. date</param>
+        /// <param name="to">Form control containing max. date</param>
+        /// <param name="cb">Form control containing list of projects names where one is selected (or an empty string is selected)</param>
+        /// <returns></returns>
         public static EntriesFilter GenerateFilter(DateTimePicker from, DateTimePicker to, ComboBox cb)
         {
             EntriesFilter filter = new EntriesFilter(from.Value, to.Value);

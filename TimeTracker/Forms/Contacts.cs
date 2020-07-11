@@ -164,6 +164,7 @@ namespace TimeTracker.Forms
         // Filter entries and send the report
         private void sendReport_btn_Click(object sender, EventArgs e)
         {
+            sendReport_btn.Enabled = false;
             if(selected_contact != null)
             {
                 // Set up the filter
@@ -175,7 +176,7 @@ namespace TimeTracker.Forms
                 List<Entry> entries = (new EntriesController()).GetForReport(filter);
 
                 // Report
-                Report rep = new Report(selected_contact, entries);
+                Report rep = new Report(selected_contact, filter, entries);
                 bool sent = rep.Send();
                 if (sent)
                 {
@@ -190,6 +191,7 @@ namespace TimeTracker.Forms
             {
                 MessageBox.Show("Select contact to send to the report first");
             }
+            sendReport_btn.Enabled = true;
         }
     }
 }
