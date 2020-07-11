@@ -130,7 +130,7 @@ namespace TimeTracker.Controllers
                 string query = "dbo.Entry_FilterMain ";
                 if(filter.from_date != DateTime.MinValue)
                 {
-                    query += "@form_date, ";
+                    query += "@from_date, ";
                 }
                 if(filter.to_date != DateTime.MinValue)
                 {

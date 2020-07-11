@@ -39,6 +39,24 @@ namespace TimeTracker
         }
 
         /// <summary>
+        /// Validates an email address string
+        /// </summary>
+        /// <param name="e">Email address string to validate</param>
+        /// <returns></returns>
+        public static bool EmailValid(string e)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(e);
+                return addr.Address == e;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Loads projects list in combobox in form.
         /// </summary>
         /// <param name="projects">List of projects to be loaded</param>

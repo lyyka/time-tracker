@@ -54,6 +54,7 @@
     <Compile Include="Classes\ChartPoint.cs" />
     <Compile Include="Classes\EntriesFilter.cs" />
     <Compile Include="Classes\Sort.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\EntriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -64,12 +65,19 @@
     <Compile Include="Forms\Charts.Designer.cs">
       <DependentUpon>Charts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Contacts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Contacts.Designer.cs">
+      <DependentUpon>Contacts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Earnings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Earnings.Designer.cs">
       <DependentUpon>Earnings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Forms\Main.cs">
@@ -96,6 +104,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Charts.resx">
       <DependentUpon>Charts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Contacts.resx">
+      <DependentUpon>Contacts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Earnings.resx">
       <DependentUpon>Earnings.cs</DependentUpon>
@@ -153,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contacts.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

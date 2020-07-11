@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.contacts_pb = new System.Windows.Forms.PictureBox();
             this.closeForm_pb = new System.Windows.Forms.PictureBox();
             this.earnings_pb = new System.Windows.Forms.PictureBox();
             this.charts_pb = new System.Windows.Forms.PictureBox();
@@ -57,7 +58,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.projectFilter_cb = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.filter_btn = new System.Windows.Forms.Button();
+            this.resetFilter_btn = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contacts_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).BeginInit();
@@ -91,7 +96,7 @@
             this.projects_cb.FormattingEnabled = true;
             this.projects_cb.Location = new System.Drawing.Point(366, 27);
             this.projects_cb.Name = "projects_cb";
-            this.projects_cb.Size = new System.Drawing.Size(121, 21);
+            this.projects_cb.Size = new System.Drawing.Size(200, 21);
             this.projects_cb.TabIndex = 3;
             // 
             // label1
@@ -115,6 +120,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.contacts_pb);
             this.panel1.Controls.Add(this.closeForm_pb);
             this.panel1.Controls.Add(this.earnings_pb);
             this.panel1.Controls.Add(this.charts_pb);
@@ -127,6 +133,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(99, 665);
             this.panel1.TabIndex = 6;
+            // 
+            // contacts_pb
+            // 
+            this.contacts_pb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.contacts_pb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.contacts_pb.Location = new System.Drawing.Point(33, 316);
+            this.contacts_pb.Name = "contacts_pb";
+            this.contacts_pb.Size = new System.Drawing.Size(32, 32);
+            this.contacts_pb.TabIndex = 7;
+            this.contacts_pb.TabStop = false;
+            this.contacts_pb.Click += new System.EventHandler(this.contacts_pb_Click);
             // 
             // closeForm_pb
             // 
@@ -205,7 +222,7 @@
             this.currentTime_lb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.currentTime_lb.AutoSize = true;
             this.currentTime_lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentTime_lb.Location = new System.Drawing.Point(605, 14);
+            this.currentTime_lb.Location = new System.Drawing.Point(655, 14);
             this.currentTime_lb.Name = "currentTime_lb";
             this.currentTime_lb.Size = new System.Drawing.Size(149, 39);
             this.currentTime_lb.TabIndex = 8;
@@ -221,7 +238,7 @@
             this.entryEarnings_lb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.entryEarnings_lb.AutoSize = true;
             this.entryEarnings_lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.entryEarnings_lb.Location = new System.Drawing.Point(609, 53);
+            this.entryEarnings_lb.Location = new System.Drawing.Point(659, 53);
             this.entryEarnings_lb.Name = "entryEarnings_lb";
             this.entryEarnings_lb.Size = new System.Drawing.Size(31, 15);
             this.entryEarnings_lb.TabIndex = 9;
@@ -235,10 +252,10 @@
             this.entriesWrap_panel.AutoScroll = true;
             this.entriesWrap_panel.BackColor = System.Drawing.Color.White;
             this.entriesWrap_panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.entriesWrap_panel.Location = new System.Drawing.Point(99, 160);
+            this.entriesWrap_panel.Location = new System.Drawing.Point(99, 152);
             this.entriesWrap_panel.Name = "entriesWrap_panel";
             this.entriesWrap_panel.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.entriesWrap_panel.Size = new System.Drawing.Size(774, 505);
+            this.entriesWrap_panel.Size = new System.Drawing.Size(824, 513);
             this.entriesWrap_panel.TabIndex = 0;
             this.entriesWrap_panel.WrapContents = false;
             // 
@@ -255,7 +272,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(99, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(774, 93);
+            this.panel2.Size = new System.Drawing.Size(824, 93);
             this.panel2.TabIndex = 0;
             // 
             // label7
@@ -263,7 +280,7 @@
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label7.Location = new System.Drawing.Point(0, 91);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(774, 2);
+            this.label7.Size = new System.Drawing.Size(900, 2);
             this.label7.TabIndex = 7;
             // 
             // systemTrayIcon
@@ -292,15 +309,13 @@
             this.fromFilter_DTP.Name = "fromFilter_DTP";
             this.fromFilter_DTP.Size = new System.Drawing.Size(200, 20);
             this.fromFilter_DTP.TabIndex = 7;
-            this.fromFilter_DTP.ValueChanged += new System.EventHandler(this.fromFilter_DTP_ValueChanged);
             // 
             // toFilter_DTP
             // 
-            this.toFilter_DTP.Location = new System.Drawing.Point(409, 119);
+            this.toFilter_DTP.Location = new System.Drawing.Point(323, 119);
             this.toFilter_DTP.Name = "toFilter_DTP";
             this.toFilter_DTP.Size = new System.Drawing.Size(200, 20);
             this.toFilter_DTP.TabIndex = 8;
-            this.toFilter_DTP.ValueChanged += new System.EventHandler(this.toFilter_DTP_ValueChanged);
             // 
             // label4
             // 
@@ -314,7 +329,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(406, 103);
+            this.label5.Location = new System.Drawing.Point(320, 103);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 10;
@@ -323,28 +338,58 @@
             // projectFilter_cb
             // 
             this.projectFilter_cb.FormattingEnabled = true;
-            this.projectFilter_cb.Location = new System.Drawing.Point(711, 118);
+            this.projectFilter_cb.Location = new System.Drawing.Point(541, 118);
             this.projectFilter_cb.Name = "projectFilter_cb";
             this.projectFilter_cb.Size = new System.Drawing.Size(150, 21);
             this.projectFilter_cb.TabIndex = 10;
-            this.projectFilter_cb.SelectedIndexChanged += new System.EventHandler(this.projectFilter_cb_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(708, 103);
+            this.label6.Location = new System.Drawing.Point(538, 103);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(91, 13);
             this.label6.TabIndex = 11;
             this.label6.Text = "Narrow to project:";
+            // 
+            // filter_btn
+            // 
+            this.filter_btn.Location = new System.Drawing.Point(730, 116);
+            this.filter_btn.Name = "filter_btn";
+            this.filter_btn.Size = new System.Drawing.Size(75, 23);
+            this.filter_btn.TabIndex = 12;
+            this.filter_btn.Text = "Filter";
+            this.filter_btn.UseVisualStyleBackColor = true;
+            this.filter_btn.Click += new System.EventHandler(this.filter_btn_Click);
+            // 
+            // resetFilter_btn
+            // 
+            this.resetFilter_btn.Location = new System.Drawing.Point(828, 116);
+            this.resetFilter_btn.Name = "resetFilter_btn";
+            this.resetFilter_btn.Size = new System.Drawing.Size(75, 23);
+            this.resetFilter_btn.TabIndex = 13;
+            this.resetFilter_btn.Text = "Reset";
+            this.resetFilter_btn.UseVisualStyleBackColor = true;
+            this.resetFilter_btn.Click += new System.EventHandler(this.resetFilter_btn_Click);
+            // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label8.Location = new System.Drawing.Point(99, 147);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(824, 2);
+            this.label8.TabIndex = 10;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(873, 665);
+            this.ClientSize = new System.Drawing.Size(923, 665);
             this.ControlBox = false;
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.resetFilter_btn);
+            this.Controls.Add(this.filter_btn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.projectFilter_cb);
             this.Controls.Add(this.label5);
@@ -361,6 +406,7 @@
             this.Text = "Time Tracker";
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.contacts_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.earnings_pb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.charts_pb)).EndInit();
@@ -405,6 +451,10 @@
         private System.Windows.Forms.ComboBox projectFilter_cb;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button filter_btn;
+        private System.Windows.Forms.Button resetFilter_btn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox contacts_pb;
     }
 }
 

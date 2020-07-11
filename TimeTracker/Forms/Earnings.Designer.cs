@@ -303,6 +303,7 @@
             this.Controls.Add(this.from_DTP);
             this.Controls.Add(this.chartControl);
             this.Name = "Earnings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Earnings";
             this.Load += new System.EventHandler(this.Earnings_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartControl)).EndInit();

@@ -15,6 +15,7 @@ namespace TimeTracker
 {
     public partial class Main : Form
     {
+        DateTime minDateTime = DateTime.Now;
         bool timer_on = false;
         Entry current_entry = null;
         //DateTime start_time;
@@ -29,12 +30,21 @@ namespace TimeTracker
         // On form load
         private void Main_Load(object sender, EventArgs e)
         {
+            // Set min size of form
+            this.MinimumSize = this.Size;
+
             // Icon
             this.Icon = Properties.Resources.stopwatch_icon;
+
+            // System tray
             systemTrayIcon.Icon = Properties.Resources.stopwatch_icon;
             systemTrayMenu.Items["exitMenuItem"].Click += new EventHandler(delegate (Object o, EventArgs a) {
                 Application.Exit();
             });
+
+            // Filter DateTimePicker formats
+            toFilter_DTP.Format = fromFilter_DTP.Format = DateTimePickerFormat.Custom;
+            toFilter_DTP.CustomFormat = fromFilter_DTP.CustomFormat = "hh:mm:ss, dd/MMM/yyyy";
 
             // Set menu images
             logo_pb.BackgroundImage = Properties.Resources.stopwatch;
@@ -43,21 +53,44 @@ namespace TimeTracker
             charts_pb.BackgroundImage = Properties.Resources.chart;
             earnings_pb.BackgroundImage = Properties.Resources.finance;
             closeForm_pb.BackgroundImage = Properties.Resources.close;
+            contacts_pb.BackgroundImage = Properties.Resources.contacts;
 
             // Load projects into dropdown on top of form
             List<Project> all_projects = (new ProjectsController()).GetAllProjects();
             Helper.LoadProjects(all_projects, projects_cb);
             Helper.LoadProjects(all_projects, projectFilter_cb);
 
-            // Set min size of form
-            this.MinimumSize = this.Size;
-
             // Load entries
             entriesWrap_panel.AutoScroll = false;
             entriesWrap_panel.HorizontalScroll.Enabled = false;
             entriesWrap_panel.AutoScroll = true;
             List<Entry> entries = (new EntriesController()).GetAllEntries(new Sort("id", "asc")); // Get ascending order, because we are adding to FLP one on top of another, so we actually need reversed order from db
+
+            if (entries.Count > 0)
+            {
+                for (int i = 0; i < entries.Count; i++)
+                {
+                    if (entries[i].start_time < minDateTime)
+                    {
+                        minDateTime = entries[i].start_time;
+                    }
+                }
+            }
+
+            SetUpDateTimePickers();
+
             PopulateEntries(entries);
+        }
+
+        // Sets up from and to datetimepickers based on min datetime
+        private void SetUpDateTimePickers()
+        {
+            toFilter_DTP.MinDate = minDateTime.AddSeconds(1);
+            toFilter_DTP.MaxDate = DateTime.Now.AddDays(1);
+
+            fromFilter_DTP.MinDate = minDateTime;
+            fromFilter_DTP.Value = minDateTime;
+            fromFilter_DTP.MaxDate = DateTime.Now;
         }
 
         // Is called from Projects Management to update projects combobox
@@ -72,8 +105,14 @@ namespace TimeTracker
         /// <param name="entries">List of entries to be put into panel</param>
         private void PopulateEntries(List<Entry> entries)
         {
+            // Disable UI while loading
+            filter_btn.Enabled = false;
+            resetFilter_btn.Enabled = false;
+            toggleTimer_btn.Enabled = false;
+            entriesWrap_panel.Hide();
+
+            // entriesWrap_panel is a main wrap (flow layout panel)
             entriesWrap_panel.Controls.Clear();
-            // entriesWrap_panel is a main wrap
             if(entries.Count > 0)
             {
                 for (int i = 0; i < entries.Count; i++)
@@ -81,10 +120,12 @@ namespace TimeTracker
                     AddEntry(entries[i]);
                 }
             }
-            else
-            {
-                //MessageBox.Show("No time entries are found");
-            }
+
+            // Re-enable the UI
+            filter_btn.Enabled = true;
+            resetFilter_btn.Enabled = true;
+            toggleTimer_btn.Enabled = true;
+            entriesWrap_panel.Show();
         }
 
         /// <summary>
@@ -177,6 +218,7 @@ namespace TimeTracker
             card.Controls.Add(pucb_lb);
 
             ComboBox projectUpdate_cb = new ComboBox();
+            projectUpdate_cb.Width = 200;
             List<Project> all_projects = (new ProjectsController()).GetAllProjects();
             projectUpdate_cb.Items.Add("");
             for(int i = 0; i < all_projects.Count; i++)
@@ -381,11 +423,11 @@ namespace TimeTracker
             Show();
         }
 
-        // Project filter change
-        private void projectFilter_cb_SelectedIndexChanged(object sender, EventArgs e)
+        // Filter entries that are displayed
+        private void filter_btn_Click(object sender, EventArgs e)
         {
             // Set up the filter
-            EntriesFilter filter = new EntriesFilter(DateTime.MinValue, DateTime.MinValue);
+            EntriesFilter filter = new EntriesFilter(fromFilter_DTP.Value, toFilter_DTP.Value);
             if (projectFilter_cb.SelectedItem != null)
             {
                 string project_name = projectFilter_cb.SelectedItem.ToString();
@@ -395,20 +437,25 @@ namespace TimeTracker
                     filter.project_id = project.id;
                 }
             }
+            List<Entry> entries = (new EntriesController()).FilterEntriesMain(filter);
 
-
+            PopulateEntries(entries);
         }
 
-        // To date filter changed
-        private void toFilter_DTP_ValueChanged(object sender, EventArgs e)
+        // Reset filters
+        private void resetFilter_btn_Click(object sender, EventArgs e)
         {
+            SetUpDateTimePickers();
 
+            List<Entry> entries = (new EntriesController()).GetAllEntries(new Sort("id", "asc"));
+
+            PopulateEntries(entries);
         }
 
-        // From date filter changed
-        private void fromFilter_DTP_ValueChanged(object sender, EventArgs e)
+        // Open contacts
+        private void contacts_pb_Click(object sender, EventArgs e)
         {
-
+            (new Contacts()).Show();
         }
 
         // Start/Stop timer

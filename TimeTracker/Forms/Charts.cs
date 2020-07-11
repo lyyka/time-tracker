@@ -116,9 +116,9 @@ namespace TimeTracker.Forms
 
                 if(no_of_points > 0)
                 {
-                    avgHours_lb.Text = Math.Round(sumHours / no_of_points, 2).ToString() + "h";
-                    minHours_lb.Text = Math.Round(minHours, 2).ToString() + "h";
-                    maxHours_lb.Text = Math.Round(maxHours, 2).ToString() + "h";
+                    avgHours_lb.Text = Math.Round(sumHours / no_of_points, 2).ToString() + "h/day";
+                    minHours_lb.Text = Math.Round(minHours, 2).ToString() + "h/day";
+                    maxHours_lb.Text = Math.Round(maxHours, 2).ToString() + "h/day";
                 }
             }
             else

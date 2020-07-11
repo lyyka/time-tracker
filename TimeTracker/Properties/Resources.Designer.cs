@@ -83,6 +83,16 @@ namespace TimeTracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap contacts {
+            get {
+                object obj = ResourceManager.GetObject("contacts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap finance {
             get {
                 object obj = ResourceManager.GetObject("finance", resourceCulture);

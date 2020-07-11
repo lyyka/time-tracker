@@ -24,6 +24,10 @@ namespace TimeTracker.Forms
             // Icon
             this.Icon = Properties.Resources.stopwatch_icon;
 
+            // Format for datetimepicker
+            to_DTP.Format = from_DTP.Format = DateTimePickerFormat.Custom;
+            to_DTP.CustomFormat = from_DTP.CustomFormat = "hh:mm:ss, dd/MMM/yyyy";
+
             // Set up form
             this.MinimumSize = this.Size;
 

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.from_DTP = new System.Windows.Forms.DateTimePicker();
             this.to_DTP = new System.Windows.Forms.DateTimePicker();
@@ -83,9 +83,9 @@
             // project_cb
             // 
             this.project_cb.FormattingEnabled = true;
-            this.project_cb.Location = new System.Drawing.Point(461, 24);
+            this.project_cb.Location = new System.Drawing.Point(461, 25);
             this.project_cb.Name = "project_cb";
-            this.project_cb.Size = new System.Drawing.Size(121, 21);
+            this.project_cb.Size = new System.Drawing.Size(142, 21);
             this.project_cb.TabIndex = 5;
             // 
             // label3
@@ -100,7 +100,7 @@
             // applyFilters_btn
             // 
             this.applyFilters_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.applyFilters_btn.Location = new System.Drawing.Point(785, 26);
+            this.applyFilters_btn.Location = new System.Drawing.Point(624, 23);
             this.applyFilters_btn.Name = "applyFilters_btn";
             this.applyFilters_btn.Size = new System.Drawing.Size(94, 23);
             this.applyFilters_btn.TabIndex = 7;
@@ -113,17 +113,17 @@
             this.chartControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea";
-            this.chartControl.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            legend1.Title = "Legend";
-            this.chartControl.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea";
+            this.chartControl.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            legend2.Title = "Legend";
+            this.chartControl.Legends.Add(legend2);
             this.chartControl.Location = new System.Drawing.Point(0, 51);
             this.chartControl.Name = "chartControl";
-            series1.ChartArea = "ChartArea";
-            series1.Legend = "Legend1";
-            series1.Name = "Hours/day";
-            this.chartControl.Series.Add(series1);
+            series2.ChartArea = "ChartArea";
+            series2.Legend = "Legend1";
+            series2.Name = "Hours/day";
+            this.chartControl.Series.Add(series2);
             this.chartControl.Size = new System.Drawing.Size(879, 496);
             this.chartControl.TabIndex = 8;
             this.chartControl.Text = "Chart";
