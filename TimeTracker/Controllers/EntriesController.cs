@@ -144,5 +144,23 @@ namespace TimeTracker.Controllers
                 return conn.Query<Entry>(query, filter).ToList();
             }
         }
+
+        /// <summary>
+        /// Filters entries for report to send to contact. Sorted by start_time - desc.
+        /// </summary>
+        /// <param name="filter">Filter object to be applied to query</param>
+        /// <returns></returns>
+        public List<Entry> GetForReport(EntriesFilter filter)
+        {
+            using (IDbConnection conn = new SqlConnection(Helper.ConnectionString(db_name)))
+            {
+                string query = "dbo.Entry_GetForReport @from_date, @to_date";
+                if (filter.project_id > 0)
+                {
+                    query += ", @project_id";
+                }
+                return conn.Query<Entry>(query, filter).ToList();
+            }
+        }
     }
 }

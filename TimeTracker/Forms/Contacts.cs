@@ -172,7 +172,7 @@ namespace TimeTracker.Forms
 
                 // Get entries from db based on filter
                 // This list is being sorted in procedure by start_time ascending
-                List<Entry> entries = (new Controllers.EntriesController()).FilterEntriesForChart(filter);
+                List<Entry> entries = (new EntriesController()).GetForReport(filter);
 
                 // Report
                 Report rep = new Report(selected_contact, entries);
