@@ -41,6 +41,11 @@ namespace TimeTracker
             systemTrayMenu.Items["exitMenuItem"].Click += new EventHandler(delegate (Object o, EventArgs a) {
                 Application.Exit();
             });
+            systemTrayIcon.BalloonTipClosed += (s, a) => {
+                NotifyIcon icon = (NotifyIcon)s;
+                icon.Visible = false;
+                icon.Dispose();
+            };
 
             // Filter DateTimePicker formats
             toFilter_DTP.Format = fromFilter_DTP.Format = DateTimePickerFormat.Custom;
@@ -427,7 +432,7 @@ namespace TimeTracker
         private void filter_btn_Click(object sender, EventArgs e)
         {
             // Set up the filter
-            EntriesFilter filter = Helper.GenerateFilter(fromFilter_DTP, toFilter_DTP, projects_cb);
+            EntriesFilter filter = Helper.GenerateFilter(fromFilter_DTP, toFilter_DTP, projectFilter_cb);
 
             List<Entry> entries = (new EntriesController()).FilterEntriesMain(filter);
 

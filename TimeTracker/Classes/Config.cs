@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Configuration;
+using System.Threading.Tasks;
+
+namespace TimeTracker.Classes
+{
+    // Returns App setting's key value
+    public static class Config
+    {
+        public static string Get(string config)
+        {
+            return ConfigurationManager.AppSettings[config];
+        }
+    }
+}

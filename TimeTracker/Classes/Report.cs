@@ -35,35 +35,29 @@ namespace TimeTracker.Classes
         {
             if(receiver != null && entries.Count > 0)
             {
-                // TODO: Generate an Excel file with the report
+                // Generate an Excel file with the report
                 string file_name = GenerateExcel();
 
-                // TODO: Send an email with message and excel file as an attachment
-                MailConfig config = new MailConfig(); // Config from App.config
-
+                // Send an email with message and excel file as an attachment
                 MailMessage mail = new MailMessage();
-                SmtpClient client = new SmtpClient(config.server);
-                mail.From = new MailAddress(config.fromMail);
+                mail.From = new MailAddress(Config.Get("MAIL_FROM"));
                 mail.To.Add(receiver.email);
-                mail.Subject = "Time tracker report";
-                mail.Body = $"Attached is an Excel table containing the activity (entries) report for time period from {filter.from_date.ToLongDateString()} to {filter.to_date.ToLongDateString()}";
+                mail.Subject = "Time Tracker Report";
+                mail.Body = $"Attached to this email is an Excel table containing the activity (entries) report for the time period from {filter.from_date.ToLongDateString()} to {filter.to_date.ToLongDateString()}";
                 if(filter.project_id > 0)
                 {
-                    mail.Body += " on project " + (new ProjectsController()).FindProject(filter.project_id).project_name + ".";
+                    mail.Body += " assigned to user's project " + (new ProjectsController()).FindProject(filter.project_id).project_name;
                 }
-                else
-                {
-                    mail.Body += ".";
-                }
+                mail.Body += ".";
 
                 Attachment attachment = new Attachment(AppDomain.CurrentDomain.BaseDirectory + file_name);
                 mail.Attachments.Add(attachment);
 
-                client.Port = Convert.ToInt32(config.port);
-                client.Credentials = new NetworkCredential(config.username, config.password);
+                SmtpClient client = new SmtpClient(Config.Get("MAIL_SERVER"), Convert.ToInt32(Config.Get("MAIL_PORT")));
+                client.Credentials = new NetworkCredential(Config.Get("MAIL_USERNAME"), Config.Get("MAIL_PASSWORD"));
                 client.EnableSsl = true;
-
                 client.Send(mail);
+                
                 attachment.Dispose(); // Release the file so we can delete it after
                 client.Dispose();
 
