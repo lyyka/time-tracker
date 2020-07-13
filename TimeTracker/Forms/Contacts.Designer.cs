@@ -38,21 +38,23 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.createContact_btn = new System.Windows.Forms.Button();
             this.updateContact_grpbox = new System.Windows.Forms.GroupBox();
+            this.deleteContact_btn = new System.Windows.Forms.Button();
             this.updateContact_btn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.updateName_tb = new System.Windows.Forms.TextBox();
             this.updateEmail_tb = new System.Windows.Forms.TextBox();
-            this.deleteContact_btn = new System.Windows.Forms.Button();
             this.sendReport_panel = new System.Windows.Forms.Panel();
-            this.sendReport_label = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.from_DTP = new System.Windows.Forms.DateTimePicker();
+            this.saveReport_btn = new System.Windows.Forms.Button();
+            this.projects_cb = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.sendReport_btn = new System.Windows.Forms.Button();
             this.to_DTP = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.sendReport_btn = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.projects_cb = new System.Windows.Forms.ComboBox();
+            this.from_DTP = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.sendReport_label = new System.Windows.Forms.Label();
+            this.saveReport_Dialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.updateContact_grpbox.SuspendLayout();
             this.sendReport_panel.SuspendLayout();
@@ -159,6 +161,16 @@
             this.updateContact_grpbox.TabStop = false;
             this.updateContact_grpbox.Text = "Edit existing";
             // 
+            // deleteContact_btn
+            // 
+            this.deleteContact_btn.Location = new System.Drawing.Point(153, 123);
+            this.deleteContact_btn.Name = "deleteContact_btn";
+            this.deleteContact_btn.Size = new System.Drawing.Size(52, 23);
+            this.deleteContact_btn.TabIndex = 8;
+            this.deleteContact_btn.Text = "Delete";
+            this.deleteContact_btn.UseVisualStyleBackColor = true;
+            this.deleteContact_btn.Click += new System.EventHandler(this.deleteContact_btn_Click);
+            // 
             // updateContact_btn
             // 
             this.updateContact_btn.Location = new System.Drawing.Point(21, 123);
@@ -201,19 +213,10 @@
             this.updateEmail_tb.Size = new System.Drawing.Size(160, 20);
             this.updateEmail_tb.TabIndex = 5;
             // 
-            // deleteContact_btn
-            // 
-            this.deleteContact_btn.Location = new System.Drawing.Point(153, 123);
-            this.deleteContact_btn.Name = "deleteContact_btn";
-            this.deleteContact_btn.Size = new System.Drawing.Size(52, 23);
-            this.deleteContact_btn.TabIndex = 8;
-            this.deleteContact_btn.Text = "Delete";
-            this.deleteContact_btn.UseVisualStyleBackColor = true;
-            this.deleteContact_btn.Click += new System.EventHandler(this.deleteContact_btn_Click);
-            // 
             // sendReport_panel
             // 
             this.sendReport_panel.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.sendReport_panel.Controls.Add(this.saveReport_btn);
             this.sendReport_panel.Controls.Add(this.projects_cb);
             this.sendReport_panel.Controls.Add(this.label8);
             this.sendReport_panel.Controls.Add(this.sendReport_btn);
@@ -227,31 +230,42 @@
             this.sendReport_panel.Size = new System.Drawing.Size(337, 491);
             this.sendReport_panel.TabIndex = 9;
             // 
-            // sendReport_label
+            // saveReport_btn
             // 
-            this.sendReport_label.AutoSize = true;
-            this.sendReport_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sendReport_label.Location = new System.Drawing.Point(12, 13);
-            this.sendReport_label.Name = "sendReport_label";
-            this.sendReport_label.Size = new System.Drawing.Size(135, 25);
-            this.sendReport_label.TabIndex = 0;
-            this.sendReport_label.Text = "Send report to";
+            this.saveReport_btn.Location = new System.Drawing.Point(78, 294);
+            this.saveReport_btn.Name = "saveReport_btn";
+            this.saveReport_btn.Size = new System.Drawing.Size(200, 23);
+            this.saveReport_btn.TabIndex = 17;
+            this.saveReport_btn.Text = "Save the report file";
+            this.saveReport_btn.UseVisualStyleBackColor = true;
+            this.saveReport_btn.Click += new System.EventHandler(this.saveReport_btn_Click);
             // 
-            // label6
+            // projects_cb
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(75, 120);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "From:";
+            this.projects_cb.FormattingEnabled = true;
+            this.projects_cb.Location = new System.Drawing.Point(78, 235);
+            this.projects_cb.Name = "projects_cb";
+            this.projects_cb.Size = new System.Drawing.Size(200, 21);
+            this.projects_cb.TabIndex = 16;
             // 
-            // from_DTP
+            // label8
             // 
-            this.from_DTP.Location = new System.Drawing.Point(78, 136);
-            this.from_DTP.Name = "from_DTP";
-            this.from_DTP.Size = new System.Drawing.Size(200, 20);
-            this.from_DTP.TabIndex = 11;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(75, 219);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Project:";
+            // 
+            // sendReport_btn
+            // 
+            this.sendReport_btn.Location = new System.Drawing.Point(78, 265);
+            this.sendReport_btn.Name = "sendReport_btn";
+            this.sendReport_btn.Size = new System.Drawing.Size(200, 23);
+            this.sendReport_btn.TabIndex = 14;
+            this.sendReport_btn.Text = "Send the report";
+            this.sendReport_btn.UseVisualStyleBackColor = true;
+            this.sendReport_btn.Click += new System.EventHandler(this.sendReport_btn_Click);
             // 
             // to_DTP
             // 
@@ -269,32 +283,31 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "To:";
             // 
-            // sendReport_btn
+            // from_DTP
             // 
-            this.sendReport_btn.Location = new System.Drawing.Point(78, 265);
-            this.sendReport_btn.Name = "sendReport_btn";
-            this.sendReport_btn.Size = new System.Drawing.Size(200, 23);
-            this.sendReport_btn.TabIndex = 14;
-            this.sendReport_btn.Text = "Send the report";
-            this.sendReport_btn.UseVisualStyleBackColor = true;
-            this.sendReport_btn.Click += new System.EventHandler(this.sendReport_btn_Click);
+            this.from_DTP.Location = new System.Drawing.Point(78, 136);
+            this.from_DTP.Name = "from_DTP";
+            this.from_DTP.Size = new System.Drawing.Size(200, 20);
+            this.from_DTP.TabIndex = 11;
             // 
-            // label8
+            // label6
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(75, 219);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Project:";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(75, 120);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "From:";
             // 
-            // projects_cb
+            // sendReport_label
             // 
-            this.projects_cb.FormattingEnabled = true;
-            this.projects_cb.Location = new System.Drawing.Point(78, 235);
-            this.projects_cb.Name = "projects_cb";
-            this.projects_cb.Size = new System.Drawing.Size(200, 21);
-            this.projects_cb.TabIndex = 16;
+            this.sendReport_label.AutoSize = true;
+            this.sendReport_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendReport_label.Location = new System.Drawing.Point(12, 13);
+            this.sendReport_label.Name = "sendReport_label";
+            this.sendReport_label.Size = new System.Drawing.Size(135, 25);
+            this.sendReport_label.TabIndex = 0;
+            this.sendReport_label.Text = "Send report to";
             // 
             // Contacts
             // 
@@ -351,5 +364,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox projects_cb;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button saveReport_btn;
+        private System.Windows.Forms.FolderBrowserDialog saveReport_Dialog;
     }
 }

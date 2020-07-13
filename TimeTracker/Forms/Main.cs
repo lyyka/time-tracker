@@ -304,6 +304,7 @@ namespace TimeTracker
             updateEntry_btn.Click += new EventHandler(delegate (Object o, EventArgs a)
             {
                 // Update entry object
+                bool originalRateRemoved = false;
                 entry.start_time = start_time.Value;
                 entry.end_time = end_time.Value;
                 entry.description = Helper.TrimToLen(descUpdate_tb.Text, 50);
@@ -317,6 +318,7 @@ namespace TimeTracker
                 {
                     entry.hourly_rate = hr_rate;
                     entry.currency = null;
+                    originalRateRemoved = true;
                 }
                 else if(hr_rate > 0 && currencyUpdate_tb.Text.Trim() == "")
                 {
@@ -324,6 +326,7 @@ namespace TimeTracker
                 }
 
                 // Find project by name
+                bool projectRateApplied = false;
                 string project_name = projectUpdate_cb.SelectedItem != null && projectUpdate_cb.SelectedItem.ToString().Trim() != "" ? projectUpdate_cb.SelectedItem.ToString() : "";
                 Project found = (new ProjectsController()).FindProjectByName(project_name);
                 if(found != null)
@@ -339,6 +342,7 @@ namespace TimeTracker
                         {
                             if (found.hourly_rate > 0)
                             {
+                                projectRateApplied = true;
                                 entry.hourly_rate = found.hourly_rate;
                                 if (found.currency != null && found.currency != "")
                                 {
@@ -355,6 +359,18 @@ namespace TimeTracker
                 else
                 {
                     entry.project_id = 0;
+                }
+
+                // If rate is removed from entry
+                if (!projectRateApplied && originalRateRemoved)
+                {
+                    DialogResult dg = MessageBox.Show("This entry will be left without an horly rate and currency, so it will not be charged. Do you want to apply hourly rate/currency from global settings?", "Warning", MessageBoxButtons.YesNo);
+                    if(dg == DialogResult.Yes)
+                    {
+                        SettingsController settings = new SettingsController();
+                        entry.hourly_rate = Convert.ToInt32(settings.GetSetting("hourly_rate").value);
+                        entry.currency = settings.GetSetting("currency").value;
+                    }
                 }
 
                 // Update entry

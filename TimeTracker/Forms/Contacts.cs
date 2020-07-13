@@ -161,30 +161,40 @@ namespace TimeTracker.Forms
             }
         }
 
+        // Create the report object
+        private Report CreateReportObject()
+        {
+            // Set up the filter
+            EntriesFilter filter = Helper.GenerateFilter(from_DTP, to_DTP, projects_cb);
+
+
+            // Get entries from db based on filter
+            // This list is being sorted in procedure by start_time ascending
+            List<Entry> entries = (new EntriesController()).GetForReport(filter);
+
+            // Report
+            return new Report(selected_contact, filter, entries);
+        }
+
         // Filter entries and send the report
         private void sendReport_btn_Click(object sender, EventArgs e)
         {
             sendReport_btn.Enabled = false;
             if(selected_contact != null)
             {
-                // Set up the filter
-                EntriesFilter filter = Helper.GenerateFilter(from_DTP, to_DTP, projects_cb);
-                
-
-                // Get entries from db based on filter
-                // This list is being sorted in procedure by start_time ascending
-                List<Entry> entries = (new EntriesController()).GetForReport(filter);
-
-                // Report
-                Report rep = new Report(selected_contact, filter, entries);
-                bool sent = rep.Send();
-                if (sent)
+                DialogResult dg = MessageBox.Show($"You are about to send this report to {selected_contact.email}. Are you sure?", "Confirm sending", MessageBoxButtons.YesNo);
+                if(dg == DialogResult.Yes)
                 {
-                    MessageBox.Show($"Report is sent successfully to {selected_contact.email}");
-                }
-                else
-                {
-                    MessageBox.Show($"Error sending report to {selected_contact.email}");
+                    Report rep = CreateReportObject();
+                    bool sent = rep.Send();
+                    if (sent)
+                    {
+                        MessageBox.Show($"Report is sent successfully to {selected_contact.email}");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error sending report to {selected_contact.email}");
+                    }
                 }
             }
             else
@@ -192,6 +202,25 @@ namespace TimeTracker.Forms
                 MessageBox.Show("Select contact to send to the report first");
             }
             sendReport_btn.Enabled = true;
+        }
+
+        // Save the report locally
+        private void saveReport_btn_Click(object sender, EventArgs e)
+        {
+            Report rep = CreateReportObject();
+            if (rep.IsValid())
+            {
+                saveReport_Dialog.ShowDialog();
+                if (saveReport_Dialog.SelectedPath != null)
+                {
+                    string filename = rep.GenerateExcel(saveReport_Dialog.SelectedPath);
+                    MessageBox.Show($"Report successfully saved as {filename}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Report is not valid. Either a contact is not selected or there are no entries for selected filters.");
+            }
         }
     }
 }

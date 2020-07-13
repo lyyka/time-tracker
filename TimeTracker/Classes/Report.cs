@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 using System.Net;
 using System.Net.Mail;
 
-using TimeTracker.Classes;
 using TimeTracker.Controllers;
 using TimeTracker.Models;
 
@@ -31,9 +28,14 @@ namespace TimeTracker.Classes
             this.filter = filter;
         }
 
+        public bool IsValid()
+        {
+            return receiver != null && entries.Count > 0;
+        }
+
         public bool Send()
         {
-            if(receiver != null && entries.Count > 0)
+            if (IsValid())
             {
                 // Generate an Excel file with the report
                 string file_name = GenerateExcel();
@@ -74,7 +76,7 @@ namespace TimeTracker.Classes
             }
         }
 
-        private string GenerateExcel()
+        public string GenerateExcel(string path = "")
         {
             Application excel = new Application();
             //excel.Visible = excel.DisplayAlerts = false;
@@ -85,6 +87,7 @@ namespace TimeTracker.Classes
 
             Range cellRange;
             
+            // -- SAVE ENTRIES DATA --
             // Get all properties
             PropertyInfo[] properties = entries[0].GetType().GetProperties();
             int j = 0;
@@ -95,6 +98,9 @@ namespace TimeTracker.Classes
                 workSheet.Cells[1, j + 1] = prop.Name;
                 j++;
             }
+            workSheet.Cells[1, j + 1] = "hours worked";
+            j++;
+            workSheet.Cells[1, j + 1] = "earnings";
 
             // i + 2 is row count
             for (int i = 0; i < entries.Count; i++)
@@ -106,15 +112,34 @@ namespace TimeTracker.Classes
                     workSheet.Cells[i + 2, j + 1] = prop.GetValue(entries[i], null);
                     j++;
                 }
+
+                // Add hours worked col
+                workSheet.Cells[i + 2, j + 1] = Math.Round(((DateTime)entries[i].end_time).Subtract(entries[i].start_time).TotalHours, 3);
+
+                j++;
+                // Add earnings col
+                if(entries[i].hourly_rate > 0)
+                {
+                    workSheet.Cells[i + 2, j + 1] = entries[i].CalculateEarnings() + entries[i].currency;
+                }
+                else
+                {
+                    workSheet.Cells[i + 2, j + 1] = "Not charged";
+                }
             }
 
-            cellRange = workSheet.Range[workSheet.Cells[1,1] , workSheet.Cells[entries.Count + 1, properties.Count()]];
+            // Auto fit all cells
+            cellRange = workSheet.Range[workSheet.Cells[1,1] , workSheet.Cells[entries.Count + 1, properties.Count() + 2]];
             cellRange.EntireColumn.AutoFit();
 
-            // Save to apps bin/Debug dir
+            // Save to apps bin/Debug dir or to provided path if any
             string base_dir = AppDomain.CurrentDomain.BaseDirectory;
+            if(path.Trim().Length > 0)
+            {
+                base_dir = path + "\\";
+            }
             string filename = "Report_" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".xlsx";
-            workBook.SaveAs(AppDomain.CurrentDomain.BaseDirectory + filename);
+            workBook.SaveAs(base_dir + filename);
 
             // Close off the excel sheet
             workBook.Close();
