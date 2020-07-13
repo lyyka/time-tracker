@@ -4,7 +4,7 @@ Time tracker desktop app developed in C#. Enables you to track time and asign tr
 # features
 - Tracking time on/off projects
 - Projects Management
-- Automatic hourly rate calculation
+- Automatic earnings calculation based on hourly rate
 - Chart showing amount of hours worked by day
-- Chart showing amount of money (in separate currencies) made by day
-- Saving contacts and the ability to send reports to any contact through mail (may be useful for tracking work by managers) (not yet implemented)
+- Chart showing amount of money (for every currency) made by day
+- Saving contacts and the ability to send reports to any contact through mail for any time span/project.
