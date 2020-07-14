@@ -98,9 +98,6 @@ namespace TimeTracker.Classes
                 workSheet.Cells[1, j + 1] = prop.Name;
                 j++;
             }
-            workSheet.Cells[1, j + 1] = "hours worked";
-            j++;
-            workSheet.Cells[1, j + 1] = "earnings";
 
             // i + 2 is row count
             for (int i = 0; i < entries.Count; i++)
@@ -111,20 +108,6 @@ namespace TimeTracker.Classes
                 {
                     workSheet.Cells[i + 2, j + 1] = prop.GetValue(entries[i], null);
                     j++;
-                }
-
-                // Add hours worked col
-                workSheet.Cells[i + 2, j + 1] = Math.Round(((DateTime)entries[i].end_time).Subtract(entries[i].start_time).TotalHours, 3);
-
-                j++;
-                // Add earnings col
-                if(entries[i].hourly_rate > 0)
-                {
-                    workSheet.Cells[i + 2, j + 1] = entries[i].CalculateEarnings() + entries[i].currency;
-                }
-                else
-                {
-                    workSheet.Cells[i + 2, j + 1] = "Not charged";
                 }
             }
 

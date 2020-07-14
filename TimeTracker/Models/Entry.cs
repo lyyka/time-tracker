@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTracker.Controllers;
 
-namespace TimeTracker
+namespace TimeTracker.Models
 {
     // DB Model of entry
     public class Entry
@@ -19,6 +19,27 @@ namespace TimeTracker
         // We are saving hourly rate/currency of project/global to each entry, in case it changes at some point
         public int hourly_rate { get; set; }
         public string currency { get; set; }
+
+        // Additional properties for the report
+        public string earnings_text {
+            get
+            {
+                if(hourly_rate > 0)
+                {
+                    return CalculateEarnings().ToString() + currency;
+                }
+                else
+                {
+                    return "Not charged";
+                }
+            }
+        }
+        public double hours_tracked {
+            get
+            {
+                return ((DateTime)end_time).Subtract(start_time).TotalHours;
+            }
+        }
 
         /// <summary>
         /// Get the project this entry refers to. If no such project exists, it returns null.
@@ -68,14 +89,10 @@ namespace TimeTracker
         /// <returns></returns>
         public double CalculateEarnings()
         {
-            DateTime moment;
-            if (this.end_time != null)
+            DateTime moment = DateTime.Now;
+            if (end_time != null)
             {
                 moment = (DateTime)this.end_time; // Convert back to non-nullable
-            }
-            else
-            {
-                moment = DateTime.Now;
             }
             TimeSpan span = moment.Subtract(this.start_time);
             return Math.Round(span.TotalHours * this.hourly_rate, 2);
