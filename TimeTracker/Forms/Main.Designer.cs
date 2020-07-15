@@ -35,6 +35,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.contacts_pb = new System.Windows.Forms.PictureBox();
             this.closeForm_pb = new System.Windows.Forms.PictureBox();
             this.earnings_pb = new System.Windows.Forms.PictureBox();
@@ -61,11 +66,7 @@
             this.filter_btn = new System.Windows.Forms.Button();
             this.resetFilter_btn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.playPause_btn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contacts_pb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeForm_pb)).BeginInit();
@@ -143,6 +144,66 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(99, 665);
             this.panel1.TabIndex = 6;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(16, 404);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(68, 18);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "Contacts";
+            this.label13.Click += new System.EventHandler(this.contacts_pb_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(19, 341);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 18);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "Earnings";
+            this.label12.Click += new System.EventHandler(this.earnings_pb_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(26, 278);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 18);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Hours";
+            this.label11.Click += new System.EventHandler(this.charts_pb_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(18, 215);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(63, 18);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Projects";
+            this.label10.Click += new System.EventHandler(this.project_pb_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(21, 142);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 18);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Settings";
+            this.label9.Click += new System.EventHandler(this.settings_pb_Click);
             // 
             // contacts_pb
             // 
@@ -271,6 +332,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.playPause_btn);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.entryEarnings_lb);
@@ -390,65 +452,16 @@
             this.label8.Size = new System.Drawing.Size(824, 2);
             this.label8.TabIndex = 10;
             // 
-            // label9
+            // playPause_btn
             // 
-            this.label9.AutoSize = true;
-            this.label9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(21, 142);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 18);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Settings";
-            this.label9.Click += new System.EventHandler(this.settings_pb_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(18, 215);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 18);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Projects";
-            this.label10.Click += new System.EventHandler(this.project_pb_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(26, 278);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(49, 18);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Hours";
-            this.label11.Click += new System.EventHandler(this.charts_pb_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(19, 341);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 18);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "Earnings";
-            this.label12.Click += new System.EventHandler(this.earnings_pb_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(16, 404);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 18);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "Contacts";
-            this.label13.Click += new System.EventHandler(this.contacts_pb_Click);
+            this.playPause_btn.Enabled = false;
+            this.playPause_btn.Location = new System.Drawing.Point(120, 54);
+            this.playPause_btn.Name = "playPause_btn";
+            this.playPause_btn.Size = new System.Drawing.Size(95, 32);
+            this.playPause_btn.TabIndex = 10;
+            this.playPause_btn.Text = "PAUSE";
+            this.playPause_btn.UseVisualStyleBackColor = true;
+            this.playPause_btn.Click += new System.EventHandler(this.playPause_btn_Click);
             // 
             // Main
             // 
@@ -456,7 +469,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(923, 665);
-            this.ControlBox = false;
             this.Controls.Add(this.label8);
             this.Controls.Add(this.resetFilter_btn);
             this.Controls.Add(this.filter_btn);
@@ -470,6 +482,7 @@
             this.Controls.Add(this.entriesWrap_panel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(846, 566);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -531,6 +544,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button playPause_btn;
     }
 }
 

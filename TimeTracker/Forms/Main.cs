@@ -468,6 +468,23 @@ namespace TimeTracker
             (new Contacts()).Show();
         }
 
+        // Play pause timer
+        private void playPause_btn_Click(object sender, EventArgs e)
+        {
+            if (timer_on)
+            {
+                timer.Enabled = !timer.Enabled;
+                if (timer.Enabled)
+                {
+                    playPause_btn.Text = "PAUSE";
+                }
+                else
+                {
+                    playPause_btn.Text = "CONTINUE";
+                }
+            }
+        }
+
         // Start/Stop timer
         private void toggleTimer_btn_Click(object sender, EventArgs e)
         {
@@ -520,6 +537,7 @@ namespace TimeTracker
                 desc_tb.Text = "";
                 projects_cb.Enabled = false;
                 desc_tb.Enabled = false;
+                playPause_btn.Enabled = true;
 
                 timer.Start();
             }
@@ -527,6 +545,8 @@ namespace TimeTracker
             {
                 projects_cb.Enabled = true;
                 desc_tb.Enabled = true;
+                playPause_btn.Enabled = false;
+                playPause_btn.Text = "PAUSE";
 
                 toggleTimer_btn.Text = "Start Timer";
                 timer.Stop();
